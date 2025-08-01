@@ -65,7 +65,7 @@
 
 
 //             {/* Social Links... */}
-//              <div className="flex gap-3 text-3xl bounce-animation text-center  mt-9 text-soft-white ml-1">
+//              <div className="flex gap-3 text-3xl bounce-animation text-center  mt-9 text-gray-700 ml-1">
 //               <a
 //                 href={"#"}
 //                 target="_blank"
@@ -215,7 +215,7 @@ const HeroSection = () => {
           </Button>
         </div>
 
-        <div className="flex gap-3 text-3xl  text-center mt-9 text-soft-white ml-1">
+        <div className="flex gap-3 text-3xl  text-center mt-9 text-gray-700 ml-1">
           {SocialLinks.map((link, i) => (
             <Link
               key={i}

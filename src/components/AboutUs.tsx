@@ -375,7 +375,7 @@ const AboutUs = () => {
               key={index}
               data-aos="zoom-in"
               data-aos-delay={index * 100}
-              className="relative cursor-default group overflow-hidden hover:border-none border p-5 rounded-lg bg-white shadow-md shadow-blue-dark hover:shadow-none transition"
+              className="relative cursor-default group overflow-hidden hover:border-none border px-4 py-5 rounded-lg bg-white shadow-md shadow-blue-dark hover:shadow-none transition"
             >
               <div className="absolute inset-0 bg-blue-dark translate-y-[-100%] group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-10"></div>
               <div className="relative z-20">
@@ -400,7 +400,7 @@ const AboutUs = () => {
               key={index}
               data-aos="flip-left"
               data-aos-delay={index * 80}
-              className="relative cursor-default group p-6 rounded-lg shadow-md shadow-blue-dark hover:shadow-none bg-white overflow-hidden border"
+              className="relative cursor-default group px-4 py-6 rounded-lg shadow-md shadow-blue-dark hover:shadow-none bg-white overflow-hidden border"
             >
               <div className="absolute inset-0 bg-blue-dark -translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-10"></div>
               <div className="relative z-20">

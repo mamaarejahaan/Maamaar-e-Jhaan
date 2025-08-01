@@ -128,7 +128,7 @@ const ContactUs = () => {
       toast.error("Please fill all fields");
       return;
     }
-    alert("submitted");
+    toast.success("Thank you for contacting us, we will react you out soon!");
     setName("");
     setEmail("");
     setMessage("");
@@ -149,7 +149,7 @@ const ContactUs = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="max-w-2xl mx-auto space-y-6   p-8 shadow-sm shadow-blue-dark rounded-lg"
+        className="max-w-2xl mx-auto space-y-6   px-6 py-8  shadow-sm shadow-blue-dark rounded-lg"
         data-aos="fade-up"
       >
          <div className="flex justify-center text-blue-dark gap-2 items-center">
@@ -161,7 +161,7 @@ const ContactUs = () => {
         <hr className="border border-gray-300 -mt-3" />
         {/* Name */}
         <div className="space-y-2">
-          <Label htmlFor="name">Name</Label>
+          <Label htmlFor="name" className="font-semibold">Name</Label>
           <Input
             id="name"
             value={name}
@@ -172,7 +172,7 @@ const ContactUs = () => {
 
         {/* Email */}
         <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email" className="font-semibold">Email</Label>
           <Input
             id="email"
             type="email"
@@ -184,7 +184,7 @@ const ContactUs = () => {
 
         {/* Message */}
         <div className="space-y-2">
-          <Label htmlFor="message">Message</Label>
+          <Label htmlFor="message" className="font-semibold">Message</Label>
           <Textarea
             id="message"
             rows={5}
@@ -202,14 +202,14 @@ const ContactUs = () => {
         </Button>
       </form>
 
-     <div className="flex flex-col items-center justify-center mt-4 gap-8">
+     <div className="flex flex-col items-center justify-center mt-4 -ml-2 gap-8">
        <div className="flex flex-col items-center justify-center  text-3xl font-bold text-blue-dark">
         <div className="flex  items-center justify-between ">
           <div className="w-7 h-[1px] bg-blue-dark mt-4 mr-1.5"></div>
           <p>Connect with Us</p>
         </div>
       </div>
-      <div className="flex gap-5  text-3xl sm:text-4xl text-center w-full  justify-center  pl-3 text-soft-white ">
+      <div className="flex gap-5  text-3xl sm:text-4xl text-center w-full  justify-center  pl-7 text-gray-700 ">
        {SocialLinks.map((link, i) => (
             <Link
               key={i}
