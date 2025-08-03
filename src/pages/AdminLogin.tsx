@@ -17,6 +17,10 @@ const AdminLogin = () => {
 
   const onSubmit = async (data: any) => {
     try {
+        const existingSession = await account.get();
+if (existingSession) {
+  await account.deleteSession('current');
+}
       const session = await account.createEmailPasswordSession(data.email, data.password);
       setSession(session);
       navigate('/admin'); 

@@ -320,7 +320,7 @@ const team = [
   {
     title: "Student Affairs",
     name: "Irfan Habib",
-    //  img:"/Anees.jpeg",
+     img:"/Irfan.jpeg",
     description: `Handles student issues, complaints, support\nHostel and personal problems`,
   },
   {
@@ -332,7 +332,7 @@ const team = [
   {
     title: "Religious & Ethical Development",
     name: "Abubakar Bajwa",
-    // img:"/RafeyFeroz.jpeg",
+     img:"/AbuBakar.jpeg",
     description: `Deen-Duniya balance, Islamic sessions, tarbiyah`,
   },
   {
