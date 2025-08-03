@@ -314,41 +314,49 @@ const team = [
   {
     title: "Education & Academics",
     name: "Anees Ahmad",
+    img:"/Anees.jpeg",
     description: `Study resources, tutoring, workshops\nCareer counseling & field guidance\nAdmission & scholarship guidance`,
   },
   {
     title: "Student Affairs",
     name: "Irfan Habib",
+    //  img:"/Anees.jpeg",
     description: `Handles student issues, complaints, support\nHostel and personal problems`,
   },
   {
     title: "Administration",
     name: "Nouraiz & Abdul Rafay",
+    img:"/RafeyFeroz.jpeg",
     description: `Skill development, workshops\nPublic speaking, project handling`,
   },
   {
     title: "Religious & Ethical Development",
     name: "Abubakar Bajwa",
+    // img:"/RafeyFeroz.jpeg",
     description: `Deen-Duniya balance, Islamic sessions, tarbiyah`,
   },
   {
     title: "Media & Communications",
     name: "Hadeed Ahmad",
+    img:"/Hadeed.jpeg",
     description: `Manages social media, content, design\nWebsite & newsletter handling`,
   },
   {
     title: "Events & Outreach",
     name: "Sikandar",
+    // img:"/RafeyFeroz.jpeg",
     description: `Organizing seminars, competitions, public events\nManaging collaborations with other bodies`,
   },
   {
     title: "Leadership & Training",
     name: "Br. Sher Ali",
+    img:"/SherAli.JPG",
     description: `Skill development, workshops\nPublic speaking, project handling`,
   },
   {
     title: "Finance",
     name: "Faizan Rauf",
+    img:"/Faizan.jpeg",
     description: `Budgeting, funding, logistics`,
   },
 ];
@@ -358,16 +366,16 @@ const AboutUs = () => {
     <section id="about" className="py-20 px-8 md:px-32 space-y-16 bg-gray-50">
       {/* About Section */}
       <div className="text-center">
-        <h2  data-aos="fade-down" className="text-4xl font-bold text-blue-dark mb-4">About Us</h2>
+        <h2  data-aos="fade-down" className="text-4xl font-bold bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text mb-4">About Us</h2>
         <p className="md:text-lg text-gray-700"
          data-aos="fade-right">
-          <strong className="text-xl text-blue-dark italic">Mamar-e-Jahan</strong> is more than a society — it's a movement of passionate medicos from Sargodha Medical College, rooted in Iqbal’s dream and the spirit of Shaheen. We work to uplift students spiritually, mentally, and professionally — guiding them toward balanced lives of purpose, resilience, and leadership, all under the light of divine values.
+          <strong className="text-xl bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text italic">Mamar-e-Jahan</strong> is more than a society — it's a movement of passionate medicos from Sargodha Medical College, rooted in Iqbal’s dream and the spirit of Shaheen. We work to uplift students spiritually, mentally, and professionally — guiding them toward balanced lives of purpose, resilience, and leadership, all under the light of divine values.
         </p>
       </div>
 
       {/* Goals Section */}
       <div className="text-center" data-aos="fade-up">
-        <h2 className="text-2xl font-bold text-blue-dark mb-10">Our Goals</h2>
+        <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text mb-10">Our Goals</h2>
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 text-left">
           {goals.map((goal, index) => (
             <div
@@ -376,9 +384,9 @@ const AboutUs = () => {
               data-aos-delay={index * 100}
               className="relative cursor-default group overflow-hidden hover:border-none border px-4 py-5 rounded-lg bg-white shadow-md shadow-blue-dark hover:shadow-none transition"
             >
-              <div className="absolute inset-0 bg-blue-dark translate-y-[-100%] group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-10"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-dark to-indigo-700  translate-y-[-100%] group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-10"></div>
               <div className="relative z-20">
-                <h3 className="text-lg font-semibold text-blue-dark mb-2 group-hover:text-white">
+                <h3 className="text-lg font-semibold bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text mb-2 group-hover:text-white">
                   {index + 1}. {goal.title}
                 </h3>
                 <p className="text-gray-700 text-sm group-hover:text-white">
@@ -392,14 +400,14 @@ const AboutUs = () => {
 
       {/* Team Section */}
       <div className="text-center" data-aos="fade-up">
-        <h2 className="text-2xl font-bold text-blue-dark mb-10">Our Team</h2>
+        <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text mb-10">Our Team</h2>
 
           <div className="flex flex-col md:flex-row justify-center gap-3 md:gap-6 items-center  ">
         <div className="cursor-default w-full md:w-1/2 px-4 py-6 order-2 md:order-1  rounded-lg shadow-md shadow-blue-dark  bg-white overflow-hidden border">
-           <h3 className="text-xl font-semibold text-blue-dark  mb-1">
+           <h3 className="text-xl font-semibold bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text  mb-1">
                   Maaz Javaid
                 </h3>
-                <p className="text-blue-800 font-medium mb-2 ">
+                <p className="text-indigo-700 font-medium mb-2 ">
                  — President, Mamar-e-Jahaan
                 </p>
                 <hr className="my-3 " />
@@ -410,7 +418,7 @@ const AboutUs = () => {
 
         </div>
           <div className="w-48 h-48  order-1 md:order-2 bg-gray-200 rounded-full mb-4 flex items-center justify-center text-gray-500 text-xl font-semibold">
-                  M
+                  <img src="/President.jpeg" className="w-full h-full object-cover object-center rounded-full" />
                 </div>
         </div>
 
@@ -422,15 +430,20 @@ const AboutUs = () => {
               data-aos-delay={index * 80}
               className="relative cursor-default group px-4 py-6 rounded-lg shadow-md shadow-blue-dark hover:shadow-none bg-white overflow-hidden border"
             >
-              <div className="absolute inset-0 bg-blue-dark -translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-10"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-dark to-indigo-700  -translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-10"></div>
               <div className="relative z-20">
-                <div className="w-24 h-24 mx-auto bg-gray-200 rounded-full mb-4 flex items-center justify-center text-gray-500 text-xl font-semibold">
-                  {member.name.split(" ")[0][0]}
+                <div className="w-28 h-28 mx-auto bg-gray-200 rounded-full mb-4 flex items-center justify-center text-gray-500 text-xl font-semibold">
+                 {
+                  member?.img ?( <img src={member.img} className="w-full h-full object-contain rounded-full" />):(
+                   member.name[0].toUpperCase()
+                  )
+                 }
+                
                 </div>
-                <h3 className="text-xl font-semibold text-blue-dark group-hover:text-white mb-1">
+                <h3 className="text-xl font-semibold bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text group-hover:text-white mb-1">
                   {member.title}
                 </h3>
-                <p className="text-blue-800 font-medium mb-2 group-hover:text-gray-300">
+                <p className="text-indigo-700 font-medium mb-2 group-hover:text-gray-300">
                   {member.name}
                 </p>
                 {member.description && (

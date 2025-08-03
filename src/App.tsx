@@ -4,16 +4,32 @@ import {  Toaster } from "react-hot-toast"
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useAuthStore } from "./zustand/authStore";
+import { account } from "./appwrite/appwrite";
+import AdminAccessPage from "./pages/AdminAccessPage";
+
 
 function App() {
-
+ const {setSession}=useAuthStore()
   useEffect(() => {
   AOS.init({
-    duration: 800, // animation duration in ms
+    duration: 800, 
     easing: "ease-in-out",
-    once: false,     // whether animation should happen only once
+    once: false, 
   });
+   const checkAuth=async()=>{
+   try {
+     const session=await account.get()
+    setSession(session)
+   } catch (error) {
+    console.log("error in checking Auth",error)
+    setSession(null)
+   }
+  }
+  checkAuth()
 }, []);
+
+
 
   return (
    
@@ -21,6 +37,7 @@ function App() {
       <Toaster position="bottom-right" /> 
        <Routes>
       <Route path="/" element={<HomePage />} />
+        <Route path="/admin" element={<AdminAccessPage />} />
       </Routes>
      </div>
    

@@ -133,8 +133,8 @@ import { useState } from "react";
 import { IoIosContact } from "react-icons/io";
 import {  FaInstagramSquare } from "react-icons/fa";
 // import { FaFacebookSquare } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
- import { FaWhatsappSquare } from "react-icons/fa";
+// import { MdEmail } from "react-icons/md";
+//  import { FaWhatsappSquare } from "react-icons/fa";
 import { AiFillDingtalkSquare } from "react-icons/ai";
 // import { FaLinkedin } from "react-icons/fa6";
 import { Typewriter } from "react-simple-typewriter";
@@ -147,14 +147,14 @@ import {
 import { Link } from "react-router-dom";
 
 const SocialLinks=[
-    {
-      Icon: MdEmail,
-      href: "mailto:mamaarejahaan@gmail.com ",
-    },
-    {
-      Icon: FaWhatsappSquare,
-      href: "https://wa.me/923194760659",
-    },
+    // {
+    //   Icon: MdEmail,
+    //   href: "mailto:mamaarejahaan@gmail.com ",
+    // },
+    // {
+    //   Icon: FaWhatsappSquare,
+    //   href: "https://wa.me/923194760659",
+    // },
     {
       Icon: FaInstagramSquare,
       href: "https://www.instagram.com/mamaarejahaan", 
@@ -180,7 +180,7 @@ const HeroSection = () => {
       >
         <h1
           data-aos="fade-up"
-          className="text-4xl font-bold p-2 text-blue-dark mb-2"
+          className="text-4xl font-bold p-2 bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text mb-2"
         >
           <Typewriter
             words={['Empowering minds, changing lives']}
@@ -203,7 +203,7 @@ const HeroSection = () => {
         <div className="flex space-x-4 items-center"
         data-aos="fade-left">
           <a href="#contact">
-            <Button className="hover:scale-105 btn transition custom-multi-shadow flex gap-2 items-center bg-blue-dark">
+            <Button className="hover:scale-105 cursor-pointer transition  flex gap-2 items-center bg-gradient-to-r from-blue-dark to-indigo-700 ">
               <IoIosContact className="text-lg" />
               Contact Us
             </Button>
@@ -217,7 +217,7 @@ const HeroSection = () => {
           </Button>
         </div>
 
-        <div className="flex flex-row md:flex-col gap-3 text-2xl md:text-3xl
+        {/* <div className="flex flex-row md:flex-col gap-4 text-2xl md:text-3xl
         absolute right-8 top-0
         text-center mt-20 md:mt-30 text-gray-700 ml-1">
           {SocialLinks.map((link, i) => (
@@ -227,10 +227,39 @@ const HeroSection = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <link.Icon className="custom-multi-shadow bounce-animation cursor-pointer" />
+              <link.Icon className="custom-multi-shadow  cursor-pointer" />
             </Link>
           ))}
-        </div>
+        </div> */}
+        <div
+  className="flex md:flex-col flex-row gap-3
+  absolute right-6 md:right-8 top-[68px] md:top-28
+  items-center md:items-start
+  text-indigo-700"
+>
+  {SocialLinks.map((link, i) => (
+    <Link
+      key={i}
+      to={link.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group"
+    >
+      <link.Icon
+        className="
+          text-4xl
+          transition-all duration-300 ease-in-out
+          group-hover:text-indigo-700
+          custom-multi-shadow
+          group-hover:scale-110
+          shadow-md hover:shadow-lg
+          rounded-full p-2 bg-white
+        "
+      />
+    </Link>
+  ))}
+</div>
+
       </div>
 
       {/* Right image */}
@@ -247,9 +276,11 @@ const HeroSection = () => {
 
       {/* Dialog */}
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="sm:max-w-[600px]">
           <DialogHeader>
-            <DialogTitle>How it's started</DialogTitle>
+            <DialogTitle
+            className="bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text"
+            >How it's started</DialogTitle>
           </DialogHeader>
           <div className="w-full">
             <video

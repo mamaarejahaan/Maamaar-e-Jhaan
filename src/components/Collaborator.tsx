@@ -1,7 +1,7 @@
 const collaborators = [
   {
     name: "Paragon Consultant",
-    img:"/collaborator1.jpeg",
+    img:"/collaborator1.png",
   },
   {
     name: "A&B Consultant",
@@ -11,14 +11,14 @@ const collaborators = [
     name: "Alkhidmat Health Foundation",
     img:"/collaborator3.jpeg",
   },
-  {
-    name: "Dunya Consultant",
-    img:"/collaborator4.jpeg",
-  },
-  {
-    name: "Alkhidmat Foundation",
-    img:"/collaborator5.jpeg",
-  },
+  // {
+  //   name: "Dunya Consultant",
+  //   img:"/collaborator4.jpeg",
+  // },
+  // {
+  //   name: "Alkhidmat Foundation",
+  //   img:"/collaborator5.jpeg",
+  // },
   {
     name: "Dental Solutions",
     img:"/collaborator6.jpeg",
@@ -29,7 +29,11 @@ const collaborators = [
   },
   {
     name: "PIMA",
-    img:"/collaborator8.jpeg",
+    img:"/collaborator8.png",
+  },
+  {
+    name: "Influencer of Sarogdha",
+    img:"/collaborator9.jpeg",
   },
 ];
 const Collaborator = () => {
@@ -46,12 +50,12 @@ const Collaborator = () => {
               data-aos-delay={index * 80}
               className="relative cursor-default group px-4 py-6 rounded-lg shadow-md shadow-blue-dark hover:shadow-none bg-white overflow-hidden border"
             >
-              <div className="absolute inset-0 bg-blue-dark -translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-10"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-dark to-indigo-700  -translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-10"></div>
               <div className="relative z-20">
                 <div className=" mx-auto   mb-4 flex items-center justify-center text-gray-500 text-xl font-semibold">
                 <img src={collab.img} className="w-full h-full object-cover " />
                 </div>
-                <h3 className="text-xl font-semibold text-blue-dark group-hover:text-white mb-1">
+                <h3 className="text-xl font-semibold bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text group-hover:text-white mb-1">
                   {collab.name}
                 </h3>
               </div>

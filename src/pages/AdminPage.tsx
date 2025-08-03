@@ -1,0 +1,206 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { databases } from "@/appwrite/appwrite"; // make sure your Appwrite setup is correctly imported
+import Navbar from "@/components/Navbar";
+import { Button } from "@/components/ui/button";
+import { CustomPageLoader } from "@/components/loader";
+import { Query } from "appwrite";
+import { MdBloodtype, MdEmail, MdOutlinePhone } from "react-icons/md";
+import { TiHome } from "react-icons/ti";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import ChangePasswordForm from "@/components/ChangePasswordForm";
+import conf from "@/appwrite/conf";
+import CreateAnnouncementForm from "@/components/CreateAnnouncementForm";
+
+
+const AdminPage = () => {
+  const navigate = useNavigate();
+  const [users, setUsers] = useState<any>([]);
+  const [isOpen,setIsOpen]=useState(false)
+  const [isAnnouncementOpen,setIsAnnouncementOpen]=useState(false)
+  const [loading, setLoading] = useState(true);
+
+   useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        setLoading(true)
+        const res = await databases.listDocuments(
+          conf.appwriteDatabaseId, 
+          conf.appwriteCollectionId, 
+          [Query.orderDesc("$createdAt")]
+        );
+        setUsers(res.documents);
+      } catch (err) {
+        console.error("Error fetching users:", err);
+      }
+      finally{
+        setLoading(false)
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  const parseAnswers = (answers: string) => {
+    try {
+      return JSON.parse(answers);
+    } catch {
+      return [];
+    }
+  };
+
+  if(loading) return <CustomPageLoader />
+  return (
+    <div className="min-h-screen bg-gray-50 py-16 pb-16 md:py-20 px-4 md:px-10">
+      <Navbar />
+      <div className="max-w-6xl mx-auto">
+        <div className="flex flex-col md:flex-row justify-start items-start  md:justify-between md:items-center my-4 md:my-6">
+          <button
+            onClick={() => navigate(-1)}
+            className="text-sm bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text cursor-pointer flex gap-1 items-center justify-center"
+          >
+            <span className="text-2xl -mt-0.5">←</span> Back
+          </button>
+          <div className="flex flex-col mt-3 md:mt-0 md:flex-row w-full md:w-fit  gap-2 items-center">
+            <Button
+          size="sm"
+            onClick={() => {
+              setIsOpen(false)
+              setIsAnnouncementOpen(true)
+            }}
+             className="bg-gradient-to-r from-blue-dark w-full md:w-fit to-indigo-700 hover:bg-blue-dark cursor-pointer"
+            
+          >
+            Create Announcement
+          </Button>
+          <Button
+          size="sm"
+            onClick={() => {
+              setIsAnnouncementOpen(false)
+              setIsOpen(true)
+            }}
+             className="border border-blue-dark w-full md:w-fit cursor-pointer  bg-transparent hover:bg-gray-200  bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text hover:text-blue-dark"
+            
+          >
+            Change Password
+          </Button>
+          </div>
+        </div>
+
+        <h1 className="text-2xl md:text-3xl mt-10  md:mt-0 font-semibold text-center bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text mb-8">
+          Admin Panel - All Requests ({users?.length})
+        </h1>
+
+        {users.length === 0 ? (
+          <div className="text-center text-gray-700">
+          <p>No user requested to join the organization..</p>
+                    <Button
+                    variant="secondary"
+                    size="sm" className="
+                    border border-blue-dark bg-transparent hover:bg-transparent bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text hover:text-blue-dark cursor-pointer
+                    mt-3">Go Back</Button>
+                              </div>
+
+        ) : (
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 -mt-3 md:mt-0 gap-6">
+  {users.map((user: any) => (
+    <div 
+      key={user.$id} 
+      className="
+        p-6 rounded-xl 
+        bg-white border border-gray-100 
+        shadow-sm hover:shadow-md
+        transition-all duration-300 ease-in-out
+        hover:border-blue-100
+        hover:-translate-y-1
+      "
+    >
+      {/* Header with subtle accent */}
+      <div className="mb-4 pb-3 border-b  border-gray-100">
+        <h2 className="text-xl font-semibold f  bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text flex justify-center capitalize items-center">
+          <span className="w-1.5 h-1.5 bg-blue-dark rounded-full mr-2 mt-1  "></span>
+          {user.fullname}
+        </h2>
+      </div>
+
+      {/* User details grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-sm overflow-wrap break-words">
+        {[
+          { label: "Name", value: user.fullname, icon: <MdEmail /> },
+          { label: "Email", value: user.email, icon: "✉️" },
+          { label: "Phone", value: user.phone, icon: <MdOutlinePhone /> },
+          { label: "Class", value: user.class, icon: "🎓" },
+          { label: "Department", value: user.department, icon: <TiHome className="text-lg" /> },
+          { label: "Blood Group", value: user.bloodGroup || "N/A", icon: <MdBloodtype className="text-lg" /> },
+          { label: "Sargodha Address", value: user.sargodhaAddress, icon: "📍" },
+          { label: "Permanent Address", value: user.permanentAddress, icon: <TiHome className="text-lg" /> },
+        ].map((item, index) => (
+          <div key={index} className="flex items-center gap-2">
+          
+            <div>
+              <p className="font-medium bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text">{item.label}</p>
+              <p className="text-gray-700  ">{item.value || "N/A"}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Answers section */}
+      <div className="mt-6 pt-4 border-t border-gray-100">
+        <h3 className="
+          font-semibold mb-3 
+          text-indigo-700 flex items-center
+        ">
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            className="h-5 w-5 mr-2 mt-0.5" 
+            viewBox="0 0 20 20" 
+            fill="currentColor"
+          >
+            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+          </svg>
+          Answers
+        </h3>
+        <ul className="space-y-3">
+          {parseAnswers(user.answersArray).map((item: any, index: number) => (
+            <li 
+              key={index} 
+              className="
+                p-3 bg-gray-50 rounded-lg
+                 transition-colors
+                border border-gray-100
+              "
+            >
+              <p className="font-medium text-gray-700 flex items-start">
+                <span className="bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text mr-2">•</span>
+                {item.question}
+              </p>
+              <p className="text-gray-700 mt-1 pl-5">{item.answer}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  ))}
+</div>
+        )}
+      </div>
+
+
+       <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContent>
+          <ChangePasswordForm setIsOpen={setIsOpen} />
+        </DialogContent>
+      </Dialog>
+
+       <Dialog open={isAnnouncementOpen} onOpenChange={setIsAnnouncementOpen}>
+        <DialogContent>
+          <CreateAnnouncementForm setIsAnnouncementOpen={setIsAnnouncementOpen} />
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+};
+
+export default AdminPage;
