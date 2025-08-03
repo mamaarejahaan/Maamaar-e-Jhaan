@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { databases } from "@/appwrite/appwrite"; // make sure your Appwrite setup is correctly imported
+import { databases } from "@/appwrite/appwrite"; 
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { CustomPageLoader } from "@/components/loader";
@@ -11,6 +11,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import ChangePasswordForm from "@/components/ChangePasswordForm";
 import conf from "@/appwrite/conf";
 import CreateAnnouncementForm from "@/components/CreateAnnouncementForm";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 
 const AdminPage = () => {
@@ -95,6 +96,7 @@ const AdminPage = () => {
           <div className="text-center text-gray-700">
           <p>No user requested to join the organization..</p>
                     <Button
+                    onClick={()=>navigate("/")}
                     variant="secondary"
                     size="sm" className="
                     border border-blue-dark bg-transparent hover:bg-transparent bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text hover:text-blue-dark cursor-pointer
@@ -189,14 +191,16 @@ const AdminPage = () => {
 
 
        <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent>
+        <DialogContent className="max-h-[90vh] overflow-hidden">
           <ChangePasswordForm setIsOpen={setIsOpen} />
         </DialogContent>
       </Dialog>
 
        <Dialog open={isAnnouncementOpen} onOpenChange={setIsAnnouncementOpen}>
         <DialogContent>
+           <ScrollArea className="h-[70vh] w-full pr-2">
           <CreateAnnouncementForm setIsAnnouncementOpen={setIsAnnouncementOpen} />
+          </ScrollArea>
         </DialogContent>
       </Dialog>
     </div>

@@ -30,7 +30,7 @@ const Navbar = () => {
         </Link>
 
        {
-        location.pathname!=="/admin" && (
+        (location.pathname!=="/admin" && location.pathname!=="/announcement") && (
          <>
           {/* Desktop Menu */}
         <nav className="hidden lg:flex">
@@ -38,6 +38,12 @@ const Navbar = () => {
             <Link to="/"
             onClick={()=>window.scrollTo(0,0)}>Home</Link>
             <li><a href="#about">About Us</a></li>
+             <Link
+    to="/announcement"
+      onClick={() => setMenuOpen(false)}
+    >
+      Announcement
+    </Link>
              <li><a href="#collaborator">Collaborator</a></li>
             {/* <li><a href="#resources">Resources</a></li> */}
             <li className="relative group">
@@ -87,7 +93,7 @@ const Navbar = () => {
       </div>
 
  {
-  location.pathname!=="/admin" && (
+  (location.pathname!=="/admin" && location.pathname!=="/announcement") && (
     <>
       {menuOpen && (
   <div className="lg:hidden absolute top-16 md:top-20 left-4 right-4 z-50 bg-white rounded-lg shadow-lg p-6 flex flex-col space-y-4 transition-all duration-300 text-blue-dark font-medium">
@@ -109,6 +115,13 @@ const Navbar = () => {
     >
       About Us
     </a>
+    <Link
+    to="/announcement"
+      className="border-b border-gray-200 pb-2 hover:text-blue-700"
+      onClick={() => setMenuOpen(false)}
+    >
+      Announcement
+    </Link>
      <a
       href="#collaborator"
       className="border-b border-gray-200 pb-2 hover:text-blue-700"

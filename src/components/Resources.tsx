@@ -177,28 +177,28 @@ import { Play } from "lucide-react";
 
 const yearLinks = [
   {
-    year: "Medical",
-    img: "/notes4.jpg",
+    year: "Medical book bank",
+    img: "/notes1.jpeg",
     link: "https://drive.google.com/drive/folders/1rQ7l6cOHlB244_fKFdEqSP0CS0tkk24t",
   },
   {
-    year: "1st Year",
-    img: "/notes1.jpg",
+    year: "1st Year Notes",
+    img: "/notes2.jpeg",
     link: "https://drive.google.com/drive/folders/1My5EY4ery1AeM1ROKceq2XezlRv6E1cU",
   },
   {
-    year: "2nd Year",
-    img: "/notes2.jpg",
+    year: "2nd Year Notes",
+    img: "/notes3.jpeg",
     link: "https://drive.google.com/drive/folders/1Wm94RazJKJHUTCKzZ8mesNUF_5WzOkmv",
   },
   {
-    year: "3rd Year",
-    img: "/notes3.jpg",
+    year: "3rd Year Notes",
+    img: "/notes4.jpeg",
     link: "https://drive.google.com/drive/folders/1C_FU8ABVnaHY4xXdBVNDinicv-UVY1o1",
   },
   {
-    year: "4th Year",
-    img: "/notes4.jpg",
+    year: "4th Year Notes",
+    img: "/notes5.jpeg",
     link: "https://drive.google.com/drive/folders/1AJTxj9LJLExBwQ-3aopPMrlt8eWKTWJ4",
   },
 ];
@@ -225,11 +225,11 @@ const Resources = () => {
           >
             <img
               src={item.img}
-              alt={`${item.year} Notes`}
+              alt={`${item.year}`}
               className="w-full h-44 object-cover rounded-t-xl"
             />
             <div className="p-4 flex flex-col justify-between flex-grow">
-              <h3 className="bg-gradient-to-r  from-blue-dark to-indigo-700 text-transparent bg-clip-text font-semibold text-md mb-3">{item.year} Notes</h3>
+              <h3 className="bg-gradient-to-r  from-blue-dark to-indigo-700 text-transparent bg-clip-text font-semibold text-sm mb-3">{item.year}</h3>
               <Link to={item.link} target="_blank" rel="noopener noreferrer">
                 <Button
                   className="bg-transparent cursor-pointer hover:bg-indigo-700 hover:text-white text-blue-dark border border-blue-dark hover:border-none transition duration-300 w-full"

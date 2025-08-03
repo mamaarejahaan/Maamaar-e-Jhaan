@@ -7,6 +7,7 @@ import "aos/dist/aos.css";
 import { useAuthStore } from "./zustand/authStore";
 import { account } from "./appwrite/appwrite";
 import AdminAccessPage from "./pages/AdminAccessPage";
+import AnnouncementPage from "./pages/AnnouncementPage";
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
        <Routes>
       <Route path="/" element={<HomePage />} />
         <Route path="/admin" element={<AdminAccessPage />} />
+         <Route path="/announcement" element={<AnnouncementPage />} />
       </Routes>
      </div>
    

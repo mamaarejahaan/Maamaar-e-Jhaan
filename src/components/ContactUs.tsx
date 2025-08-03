@@ -85,7 +85,7 @@
 
 import {  useState } from "react";
 import {  FaInstagramSquare, FaWhatsappSquare } from "react-icons/fa";
-// import { FaFacebookSquare } from "react-icons/fa";
+import { FaFacebookSquare } from "react-icons/fa";
 // import { MdEmail } from "react-icons/md";
 // import { FaWhatsappSquare } from "react-icons/fa";
 import { AiFillDingtalkSquare } from "react-icons/ai";
@@ -107,6 +107,10 @@ const SocialLinks=[
     //   Icon: FaWhatsappSquare,
     //   href: "https://wa.me/923194760659", 
     // },
+    {
+      Icon: FaFacebookSquare,
+      href: "https://www.facebook.com/share/1VH4tPwch7/",
+    },
     {
       Icon: FaInstagramSquare,
       href: "https://www.instagram.com/mamaarejahaan",
