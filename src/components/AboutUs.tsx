@@ -306,11 +306,11 @@ const goals = [
 ];
 
 const team = [
-  {
-    title: "President",
-    name: "Maaz Javaid",
-    description: `Study resources, tutoring, workshops\nCareer counseling & field guidance\nAdmission & scholarship guidance`,
-  },
+  // {
+  //   title: "President",
+  //   name: "Maaz Javaid",
+  //   description: `Study resources, tutoring, workshops\nCareer counseling & field guidance\nAdmission & scholarship guidance`,
+  // },
   {
     title: "Education & Academics",
     name: "Anees Ahmad",
@@ -354,7 +354,6 @@ const team = [
 ];
 
 const AboutUs = () => {
-
   return (
     <section id="about" className="py-20 px-8 md:px-32 space-y-16 bg-gray-50">
       {/* About Section */}
@@ -369,7 +368,7 @@ const AboutUs = () => {
       {/* Goals Section */}
       <div className="text-center" data-aos="fade-up">
         <h2 className="text-2xl font-bold text-blue-dark mb-10">Our Goals</h2>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 text-left">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 text-left">
           {goals.map((goal, index) => (
             <div
               key={index}
@@ -394,7 +393,28 @@ const AboutUs = () => {
       {/* Team Section */}
       <div className="text-center" data-aos="fade-up">
         <h2 className="text-2xl font-bold text-blue-dark mb-10">Our Team</h2>
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+
+          <div className="flex flex-col md:flex-row justify-center gap-3 md:gap-6 items-center  ">
+        <div className="cursor-default w-full md:w-1/2 px-4 py-6 order-2 md:order-1  rounded-lg shadow-md shadow-blue-dark  bg-white overflow-hidden border">
+           <h3 className="text-xl font-semibold text-blue-dark  mb-1">
+                  Maaz Javaid
+                </h3>
+                <p className="text-blue-800 font-medium mb-2 ">
+                 — President, Mamar-e-Jahaan
+                </p>
+                <hr className="my-3 " />
+
+                  <p className="text-gray-700 whitespace-pre-line text-sm ">
+                   At Mamar-e-Jahaan, we believe true success lies in balancing Deen and Dunya. Our mission is to guide, support, and empower students — spiritually, emotionally, and academically. Through faith, mentorship, and purposeful engagement, we aim to nurture confident, compassionate, and visionary individuals. Let’s walk together on the path of excellence, for the sake of Allah and the betterment of our Ummah.
+                  </p>
+
+        </div>
+          <div className="w-48 h-48  order-1 md:order-2 bg-gray-200 rounded-full mb-4 flex items-center justify-center text-gray-500 text-xl font-semibold">
+                  M
+                </div>
+        </div>
+
+        <div className="grid gap-5 md:gap-10 mt-9 md:grid-cols-2 lg:grid-cols-3">
           {team.map((member, index) => (
             <div
               key={index}

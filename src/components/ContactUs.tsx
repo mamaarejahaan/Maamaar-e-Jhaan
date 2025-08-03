@@ -85,10 +85,10 @@
 
 import {  useState } from "react";
 import {  FaInstagramSquare } from "react-icons/fa";
-import { FaFacebookSquare } from "react-icons/fa";
+// import { FaFacebookSquare } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaWhatsappSquare } from "react-icons/fa";
-// import { FaLinkedin } from "react-icons/fa6";
+import { AiFillDingtalkSquare } from "react-icons/ai";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
@@ -101,19 +101,19 @@ import { IoMdSend } from "react-icons/io";
 const SocialLinks=[
     {
       Icon: MdEmail,
-      href: "mailto:kashisial2327@gmail.com",
+      href: "mailto:mamaarejahaan@gmail.com ",
     },
     {
       Icon: FaWhatsappSquare,
-      href: "https://wa.me/923314315567", // Replace with your phone number (no + or dashes)
+      href: "https://wa.me/923194760659", 
     },
     {
       Icon: FaInstagramSquare,
-      href: "https://instagram.com/yourusername", // Replace with your Instagram username
+      href: "https://www.instagram.com/mamaarejahaan",
     },
     {
-      Icon: FaFacebookSquare,
-      href: "https://facebook.com/yourusername", // Replace with your Facebook username/page
+      Icon: AiFillDingtalkSquare,
+      href: "https://www.instagram.com/medtalks0",
     },
   ]
 const ContactUs = () => {
@@ -137,7 +137,7 @@ const ContactUs = () => {
   return (
     <section
       id="contact"
-      className="py-20 px-8 md:px-32 space-y-16"
+      className="py-20 px-8 md:px-32 space-y-16 bg-gray-50"
       data-aos="fade-up"
     >
       <div className="text-center space-y-2" data-aos="zoom-in">

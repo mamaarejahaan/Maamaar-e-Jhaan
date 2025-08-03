@@ -132,9 +132,10 @@ import { Button } from "./ui/button"
 import { useState } from "react";
 import { IoIosContact } from "react-icons/io";
 import {  FaInstagramSquare } from "react-icons/fa";
-import { FaFacebookSquare } from "react-icons/fa";
+// import { FaFacebookSquare } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import { FaWhatsappSquare } from "react-icons/fa";
+ import { FaWhatsappSquare } from "react-icons/fa";
+import { AiFillDingtalkSquare } from "react-icons/ai";
 // import { FaLinkedin } from "react-icons/fa6";
 import { Typewriter } from "react-simple-typewriter";
 import {
@@ -148,19 +149,19 @@ import { Link } from "react-router-dom";
 const SocialLinks=[
     {
       Icon: MdEmail,
-      href: "mailto:kashisial2327@gmail.com",
+      href: "mailto:mamaarejahaan@gmail.com ",
     },
     {
       Icon: FaWhatsappSquare,
-      href: "https://wa.me/923314315567", // Replace with your phone number (no + or dashes)
+      href: "https://wa.me/923194760659",
     },
     {
       Icon: FaInstagramSquare,
-      href: "https://instagram.com/yourusername", // Replace with your Instagram username
+      href: "https://www.instagram.com/mamaarejahaan", 
     },
     {
-      Icon: FaFacebookSquare,
-      href: "https://facebook.com/yourusername", // Replace with your Facebook username/page
+      Icon: AiFillDingtalkSquare,
+      href: "https://www.instagram.com/medtalks0",
     },
   ]
 const HeroSection = () => {
@@ -169,7 +170,8 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="grid grid-cols-1 md:grid-cols-2 col-reverse gap-8 min-h-screen md:pt-40 items-center bg-gray-200 justify-items-center py-24 pb-16 md:py-20 px-8 md:px-10"
+      className="relative grid grid-cols-1
+      md:grid-cols-2 col-reverse gap-8 min-h-screen md:pt-40 items-center bg-gray-200 justify-items-center py-24 pb-16 md:py-20 px-8 md:px-10"
     >
 
       {/* Left content */}
@@ -208,14 +210,16 @@ const HeroSection = () => {
           </a>
           <Button
             onClick={() => setIsOpen(true)}
-            className="border border-blue-dark cursor-pointer bg-transparent hover:bg-transparent text-blue-dark flex items-center justify-center"
+            className="border border-blue-dark  cursor-pointer bg-transparent hover:bg-transparent text-blue-dark flex items-center justify-center"
           >
-            <Play className="w-4 h-4" />
-            Watch live Video
+            <Play className="mt-0.5" />
+            How it's started
           </Button>
         </div>
 
-        <div className="flex gap-3 text-3xl  text-center mt-9 text-gray-700 ml-1">
+        <div className="flex flex-row md:flex-col gap-3 text-2xl md:text-3xl
+        absolute right-8 top-0
+        text-center mt-20 md:mt-30 text-gray-700 ml-1">
           {SocialLinks.map((link, i) => (
             <Link
               key={i}
@@ -232,7 +236,7 @@ const HeroSection = () => {
       {/* Right image */}
       <div
       data-aos="fade-left"
-        className="lg:ml-40 order-1 md:order-2"
+        className="lg:ml-40 mt-4 md:mt-0 order-1 md:order-2"
       >
         <img
           src="Logo.png"
@@ -245,7 +249,7 @@ const HeroSection = () => {
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Documentory</DialogTitle>
+            <DialogTitle>How it's started</DialogTitle>
           </DialogHeader>
           <div className="w-full">
             <video

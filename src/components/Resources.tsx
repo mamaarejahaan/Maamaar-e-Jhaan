@@ -177,9 +177,14 @@ import { Play } from "lucide-react";
 
 const yearLinks = [
   {
+    year: "Medical books",
+    img: "/notes4.jpg",
+    link: "https://drive.google.com/drive/folders/1rQ7l6cOHlB244_fKFdEqSP0CS0tkk24t",
+  },
+  {
     year: "1st Year",
     img: "/notes1.jpg",
-    link: "https://drive.google.com/drive/folders/17dq3-EMyuN6uBKIixSxdQETdFOWp0M81",
+    link: "https://drive.google.com/drive/folders/1My5EY4ery1AeM1ROKceq2XezlRv6E1cU",
   },
   {
     year: "2nd Year",
@@ -202,15 +207,15 @@ const Resources = () => {
 
 
   return (
-    <div id="resources" className="py-20 px-6 md:px-20 space-y-20 bg-[#f9fafb]">
+    <div id="resources" className="py-20 px-8 md:px-20 space-y-16 bg-gray-50">
       {/* Header */}
       <div className="text-center space-y-3" data-aos="fade-up">
-        <h2 className="text-4xl font-bold text-blue-dark">Resources</h2>
+        <h2 className="text-4xl font-bold text-blue-dark">Academic Resources</h2>
         <p className="text-gray-700 text-lg">Find your academic notes and playlists, organized year-wise.</p>
       </div>
 
       {/* Cards Section */}
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
         {yearLinks.map((item, index) => (
           <div
             key={index}
@@ -239,8 +244,8 @@ const Resources = () => {
 
       {/* YouTube Playlist CTA */}
       <div
-        className="bg-gray-200 p-8 flex flex-col items-center justify-center rounded-xl shadow-inner max-w-2xl mx-auto text-center"
-        data-aos="zoom-in"
+        className="bg-gray-200 p-8 -mt-4 flex flex-col items-center justify-center rounded-xl shadow-inner max-w-2xl mx-auto text-center"
+        data-aos="fade-right"
         data-aos-delay="400"
       >
         <h3 className="text-xl font-semibold text-blue-dark mb-4">🎬 Enhance Your Learning</h3>

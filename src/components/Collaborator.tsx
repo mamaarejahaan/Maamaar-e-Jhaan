@@ -1,0 +1,66 @@
+const collaborators = [
+  {
+    name: "Paragon Consultant",
+    img:"/collaborator1.jpeg",
+  },
+  {
+    name: "A&B Consultant",
+    img:"/collaborator2.jpeg",
+  },
+  {
+    name: "Alkhidmat Health Foundation",
+    img:"/collaborator3.jpeg",
+  },
+  {
+    name: "Dunya Consultant",
+    img:"/collaborator4.jpeg",
+  },
+  {
+    name: "Alkhidmat Foundation",
+    img:"/collaborator5.jpeg",
+  },
+  {
+    name: "Dental Solutions",
+    img:"/collaborator6.jpeg",
+  },
+  {
+    name: "Quran Club",
+    img:"/collaborator7.jpeg",
+  },
+  {
+    name: "PIMA",
+    img:"/collaborator8.jpeg",
+  },
+];
+const Collaborator = () => {
+  return (
+    <div id="collaborator"  className="py-20 px-8 md:px-32 space-y-16 bg-gray-50">
+     <div className="text-center" data-aos="fade-up">
+        <h2 className="text-2xl font-bold text-blue-dark mb-10">Our Collaborator</h2>
+
+        <div className="grid gap-5 md:gap-10 mt-9 md:grid-cols-2 lg:grid-cols-3">
+          {collaborators.map((collab, index) => (
+            <div
+              key={index}
+              data-aos="flip-left"
+              data-aos-delay={index * 80}
+              className="relative cursor-default group px-4 py-6 rounded-lg shadow-md shadow-blue-dark hover:shadow-none bg-white overflow-hidden border"
+            >
+              <div className="absolute inset-0 bg-blue-dark -translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-10"></div>
+              <div className="relative z-20">
+                <div className=" mx-auto   mb-4 flex items-center justify-center text-gray-500 text-xl font-semibold">
+                <img src={collab.img} className="w-full h-full object-cover " />
+                </div>
+                <h3 className="text-xl font-semibold text-blue-dark group-hover:text-white mb-1">
+                  {collab.name}
+                </h3>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Collaborator
