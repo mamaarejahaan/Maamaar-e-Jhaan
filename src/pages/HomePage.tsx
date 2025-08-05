@@ -4,8 +4,12 @@ import Navbar from '../components/Navbar'
 import Resources from '@/components/Resources'
 import ContactUs from '@/components/ContactUs'
 import Collaborator from '@/components/Collaborator'
+import { useEffect } from 'react'
 
 const HomePage = () => {
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
   return (
     <div>
     <Navbar />

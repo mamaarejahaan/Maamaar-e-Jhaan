@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -11,19 +12,15 @@ import { Label } from './ui/label';
 import { databases, ID } from '@/appwrite/appwrite';
 import conf from '@/appwrite/conf';
 
+const Questions = [
+  'What do you know about our vision?',
+  'Why you want to join us?',
+  'What does Iqbal philosphy mean to you as a student?',
+  'What is your relation with Quran?',
+  'Enlist your hobies? (Optional)',
+  'Enlist the book you read other than academic book? (Optional)',
+];
 
-
-
-
-const Questions=["What do you know about our vision?",
-    "Why you want to join us?",
-    "What does Iqbal philosphy mean to you as a student?",
-    "What is your relation with Quran?",
-    "Enlist at least your three hobies? (separated with comma)",
-    "Enlist the book you read other than academic book? (separated with comma)"
-]
-
-// Step 1 schema
 const step1Schema = z.object({
   fullname: z.string().min(1, 'Name is required'),
   class: z.string().min(1, 'Class is required'),
@@ -35,195 +32,248 @@ const step1Schema = z.object({
   bloodGroup: z.string().optional(),
 });
 
-// Step 2 schema
 const step2Schema = z.object({
   q1: z.string().min(1, 'This question is required'),
   q2: z.string().min(1, 'This question is required'),
   q3: z.string().min(1, 'This question is required'),
   q4: z.string().min(1, 'This question is required'),
-  q5: z.string().min(1, 'This question is required'),
-  q6: z.string().min(1, 'This question is required'),
+  q5: z.string().optional(),
+  q6: z.string().optional(),
 });
 
 type Step1FormData = z.infer<typeof step1Schema>;
 type Step2FormData = z.infer<typeof step2Schema>;
 
-
-interface Props{
-    setDialogOpen:(val:boolean)=>void
+interface Props {
+  label: string;
+  value: string[];
+  setValue: (val: string[]) => void;
+  error?: string;
 }
-const JoinUsForm:React.FC<Props> = ({setDialogOpen}) => {
+
+const ChipInput: React.FC<Props> = ({ label, value, setValue, error }) => {
+  const [input, setInput] = useState('');
+
+  const addChip = () => {
+    const trimmed = input.trim();
+    if (trimmed && !value.includes(trimmed)) {
+      setValue([...value, trimmed]);
+      setInput('');
+    }
+  };
+
+  const removeChip = (index: number) => {
+    const newChips = [...value];
+    newChips.splice(index, 1);
+    setValue(newChips);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      addChip();
+    }
+  };
+
+  return (
+    <div>
+      <Label>{label}</Label>
+      <div className="flex flex-wrap gap-2 mt-2 border border-gray-300 rounded-md p-2 min-h-[46px]">
+        {value.map((chip, idx) => (
+          <div key={idx} className="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm flex items-center gap-1">
+            {chip}
+            <button type="button" onClick={() => removeChip(idx)} className="text-red-500 hover:text-red-700 text-xs ml-1">
+              ✕
+            </button>
+          </div>
+        ))}
+        <input
+          className="flex-1 min-w-[100px] outline-none bg-transparent"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder="Type and press Enter"
+        />
+      </div>
+      <div className="mt-2 flex md:hidden justify-end">
+        <Button size="sm" type="button" onClick={addChip}>
+          Add
+        </Button>
+      </div>
+      {error && <p className="text-xs text-red-500 pl-1 mt-1">{error}</p>}
+    </div>
+  );
+};
+
+interface JoinUsProps {
+  setDialogOpen: (val: boolean) => void;
+}
+
+const JoinUsForm: React.FC<JoinUsProps> = ({ setDialogOpen }) => {
   const [step, setStep] = useState(1);
-  const [isJoining,setIsJoining]=useState(false)
-  const [formData,setFormData]=useState({})
+  const [isJoining, setIsJoining] = useState(false);
+  const [formData, setFormData] = useState<Step1FormData | null>(null);
+  const [q5Chips, setQ5Chips] = useState<string[]>([]);
+  const [q6Chips, setQ6Chips] = useState<string[]>([]);
+
   const {
-  register: registerStep1,
-  handleSubmit: handleSubmitStep1,
-  formState: { errors: errorsStep1 },
-  reset: resetStep1,
-} = useForm<Step1FormData>({
-  resolver: zodResolver(step1Schema),
-});
+    register: registerStep1,
+    handleSubmit: handleSubmitStep1,
+    formState: { errors: errorsStep1 },
+    reset: resetStep1,
+  } = useForm<Step1FormData>({
+    resolver: zodResolver(step1Schema),
+  });
 
-const {
-  register: registerStep2,
-  handleSubmit: handleSubmitStep2,
-  formState: { errors: errorsStep2 },
-  reset: resetStep2,
-} = useForm<Step2FormData>({
-  resolver: zodResolver(step2Schema),
-});
+  const {
+    register: registerStep2,
+    handleSubmit: handleSubmitStep2,
+    formState: { errors: errorsStep2 },
+    reset: resetStep2,
+  } = useForm<Step2FormData>({
+    resolver: zodResolver(step2Schema),
+  });
 
-
-  const onSubmitStep1 = (data:Step1FormData) => {
-    setFormData({
-   fullname: data.fullname,
-  class: data.class,
-  department: data.department,
-  sargodhaAddress: data.sargodhaAddress,
-  permanentAddress:data.permanentAddress,
-  email: data.email,
-  phone: data.phone,
-  bloodGroup: data.bloodGroup || "",
-
-    })
-    setStep(2)
+  const onSubmitStep1 = (data: Step1FormData) => {
+    setFormData(data);
+    setStep(2);
   };
-   const onSubmitStep2 = async(data: Step2FormData) => {
-      const answersArray = Questions.map((q, index) => ({
-    question: q,
-    answer: data[`q${index + 1}` as keyof Step2FormData],
-  }));
 
-  const fullData = {
-    ...formData,
-    answersArray: JSON.stringify(answersArray),
-  };
-      const toastId=toast.loading("Processing...")
-      console.log("fulldaata",fullData)
+  const onSubmitStep2 = async (data: Step2FormData) => {
+    if (!formData) return;
+
+    const answersArray = Questions.map((q, index) => {
+      let answer = '';
+      if (index === 4) {
+        answer = q5Chips.join(', ');
+      } else if (index === 5) {
+        answer = q6Chips.join(', ');
+      } else {
+        answer = data[`q${index + 1}` as keyof Step2FormData] || '';
+      }
+      return { question: q, answer };
+    });
+
+    const fullData = {
+      ...formData,
+      answersArray: JSON.stringify(answersArray),
+    };
+
+    const toastId = toast.loading('Processing...');
     try {
-     setIsJoining(true)
-    await databases.createDocument(
-    conf.appwriteDatabaseId,
-    conf.appwriteCollectionId,
-    ID.unique(),
-    fullData
-    )    
-     toast.success('Thank you for joining us, we will contact you soon!',{id:toastId});
-    setDialogOpen(false);
-    resetStep1();
-    resetStep2();
+      setIsJoining(true);
+      await databases.createDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteCollectionId,
+        ID.unique(),
+        fullData
+      );
+      toast.success('Thank you for joining us, we will contact you soon!', { id: toastId });
+      setDialogOpen(false);
+      resetStep1();
+      resetStep2();
+      setQ5Chips([]);
+      setQ6Chips([]);
     } catch (error) {
-        console.error('Error saving to Appwrite:', error);
-    toast.error('Something went wrong while submitting. Try again.',{id:toastId});
-    }
-    finally{
-        setIsJoining(false)
+      console.error('Error saving to Appwrite:', error);
+      toast.error('Something went wrong while submitting. Try again.', { id: toastId });
+    } finally {
+      setIsJoining(false);
     }
   };
-
- 
 
   return (
     <ScrollArea className="w-full max-w-xl pr-4">
-      <>
-        {step === 1 && (
-          <form onSubmit={handleSubmitStep1(onSubmitStep1)} className="space-y-4 py-2 max-w-xl mx-auto w-full">
-            <h2 className="text-lg font-semibold
-            bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text
-            ">Step 1: Basic Information</h2>
+      {step === 1 && (
+        <form onSubmit={handleSubmitStep1(onSubmitStep1)} className="space-y-4 py-2 max-w-xl mx-auto w-full">
+          <h2 className="text-lg font-semibold bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text">
+            Step 1: Basic Information
+          </h2>
 
-            <div>
-              <Input {...registerStep1('fullname')} placeholder="Full Name" />
-              <p className="text-xs text-red-500 mt-1 pl-1">{errorsStep1.fullname?.message}</p>
+          {(
+            [
+              'fullname',
+              'class',
+              'department',
+              'sargodhaAddress',
+              'permanentAddress',
+              'email',
+              'phone',
+              'bloodGroup',
+            ] as (keyof Step1FormData)[]
+          ).map((field) => (
+            <div key={field}>
+              <Input
+                {...registerStep1(field)}
+                placeholder={field.replace(/([A-Z])/g, ' $1')}
+                type={field === 'email' ? 'email' : 'text'}
+              />
+              <p className="text-xs text-red-500 mt-1 pl-1">{errorsStep1[field]?.message}</p>
             </div>
+          ))}
 
-            <div>
-              <Input {...registerStep1('class')} placeholder="Class" />
-              <p className="text-xs text-red-500 mt-1 pl-1">{errorsStep1.class?.message}</p>
-            </div>
-
-            <div>
-              <Input {...registerStep1('department')} placeholder="Department" />
-              <p className="text-xs text-red-500 mt-1 pl-1">{errorsStep1.department?.message}</p>
-            </div>
-
-            <div>
-              <Input {...registerStep1('sargodhaAddress')} placeholder="Sargodha Address" />
-              <p className="text-xs text-red-500 mt-1 pl-1">{errorsStep1.sargodhaAddress?.message}</p>
-            </div>
-
-            <div>
-              <Input {...registerStep1('permanentAddress')} placeholder="Permanent Address" />
-              <p className="text-xs text-red-500 mt-1 pl-1">{errorsStep1.permanentAddress?.message}</p>
-            </div>
-
-            <div>
-              <Input {...registerStep1('email')} type="email" placeholder="Email" />
-              <p className="text-xs text-red-500 mt-1 pl-1">{errorsStep1.email?.message}</p>
-            </div>
-
-            <div>
-              <Input {...registerStep1('phone')} placeholder="Phone" />
-              <p className="text-xs text-red-500 mt-1 pl-1">{errorsStep1.phone?.message}</p>
-            </div>
-
-            <div>
-              <Input {...registerStep1('bloodGroup')} placeholder="Blood Group (Optional)" />
-            </div>
-           <div className='flex justify-between'>
-            <Button 
-            type='button'
-              className='border bg-transparent hover:bg-transparent border-blue-dark bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text cursor-pointer hover:text-blue-dark'
+          <div className="flex justify-between">
+            <Button
+              type="button"
+              className="border bg-transparent hover:bg-transparent border-blue-dark bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text cursor-pointer hover:text-blue-dark"
               onClick={() => {
-                setDialogOpen(false)
-                resetStep1()
-                resetStep2()
-              }}>
-                Close
-              </Button>
-            <Button type="submit"  className='bg-gradient-to-r from-blue-dark to-indigo-700  hover:bg-blue-dark cursor-pointer float-end' >
+                setDialogOpen(false);
+                resetStep1();
+                resetStep2();
+              }}
+            >
+              Close
+            </Button>
+            <Button type="submit" className="bg-gradient-to-r from-blue-dark to-indigo-700 hover:bg-blue-dark cursor-pointer">
               Next
             </Button>
-                       </div>
-          </form>
-        )}
+          </div>
+        </form>
+      )}
 
-        {step === 2 && (
-          <form onSubmit={handleSubmitStep2(onSubmitStep2)} className="space-y-4 py-2 max-w-xl mx-auto w-full">
-            <h2 className="text-lg font-semibold
-            bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text">Step 2: Answer These Questions in 2-3 lines</h2>
+      {step === 2 && (
+        <form onSubmit={handleSubmitStep2(onSubmitStep2)} className="space-y-4 py-2 max-w-xl mx-auto w-full">
+          <h2 className="text-lg font-semibold bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text">
+            Step 2: Answer These Questions in 2-3 lines
+          </h2>
 
-            {Questions.map((num,index) => (
-              <div key={index}>
-
- 
-                <Label className='mb-2'>{num}</Label>
-                <Textarea
-                  {...registerStep2(`q${index+1}` as keyof Step2FormData)}
-                  placeholder="Write your answer"
-                  className='resize-none'
-                />
- 
-                <p className="text-xs text-red-500 pl-1 mt-1">
-                  {errorsStep2[`q${index+1}` as keyof Step2FormData]?.message as string}
-                </p>
-              </div>
-            ))}
-
-            <div className="flex justify-between gap-4 mt-4">
-              <Button variant="secondary"
-              className='border cursor-pointer border-blue-dark text-blue-dark cursor-pointer hover:text-blue-dark'
-              type="button" onClick={() => setStep(1)}
-              disabled={isJoining}>
-                Back
-              </Button>
-              <Button type="submit" className='bg-gradient-to-r from-blue-dark to-indigo-700 hover:bg-blue-dark cursor-pointer'
-              disabled={isJoining}>Join Us</Button>
+          {Questions.slice(0, 4).map((q, index) => (
+            <div key={index}>
+              <Label className="mb-2">{q}</Label>
+              <Textarea
+                {...registerStep2(`q${index + 1}` as keyof Step2FormData)}
+                placeholder="Write your answer"
+                className="resize-none"
+              />
+              <p className="text-xs text-red-500 pl-1 mt-1">
+                {errorsStep2[`q${index + 1}` as keyof Step2FormData]?.message}
+              </p>
             </div>
-          </form>
-        )}
-      </>
+          ))}
+
+          <ChipInput label={Questions[4]} value={q5Chips} setValue={setQ5Chips} />
+          <ChipInput label={Questions[5]} value={q6Chips} setValue={setQ6Chips} />
+
+          <div className="flex justify-between gap-4 mt-4">
+            <Button
+              variant="secondary"
+              className="border cursor-pointer border-blue-dark text-blue-dark hover:text-blue-dark"
+              type="button"
+              onClick={() => setStep(1)}
+              disabled={isJoining}
+            >
+              Back
+            </Button>
+            <Button
+              type="submit"
+              className="bg-gradient-to-r from-blue-dark to-indigo-700 hover:bg-blue-dark cursor-pointer"
+              disabled={isJoining}
+            >
+              Join Us
+            </Button>
+          </div>
+        </form>
+      )}
     </ScrollArea>
   );
 };

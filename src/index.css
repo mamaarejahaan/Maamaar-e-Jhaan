@@ -39,6 +39,23 @@ cursor:pointer;
     }
   }
 
+/* Move the pagination dots below the Swiper */
+.custom-swiper .swiper-pagination {
+  position: static;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* Optional: Style the dots */
+.swiper-pagination-bullet {
+  background-color: #4f46e5; /* Indigo-600 */
+  opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background-color: #1e3a8a; /* Blue-900 */
+}
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

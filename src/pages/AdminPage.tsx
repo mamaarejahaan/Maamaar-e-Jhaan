@@ -18,6 +18,8 @@ const AdminPage = () => {
   const navigate = useNavigate();
   const [users, setUsers] = useState<any>([]);
   const [isOpen,setIsOpen]=useState(false)
+  const [selectedUser, setSelectedUser] = useState<any>(null);
+const [showUserDialog, setShowUserDialog] = useState(false);
   const [isAnnouncementOpen,setIsAnnouncementOpen]=useState(false)
   const [loading, setLoading] = useState(true);
 
@@ -105,12 +107,13 @@ const AdminPage = () => {
 
         ) : (
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 -mt-3 md:mt-0 gap-6">
+      <div className="grid  grid-cols-1 lg:grid-cols-2 -mt-3 md:mt-0 gap-6">
   {users.map((user: any) => (
     <div 
       key={user.$id} 
       className="
         p-6 rounded-xl 
+        relative 
         bg-white border border-gray-100 
         shadow-sm hover:shadow-md
         transition-all duration-300 ease-in-out
@@ -118,16 +121,9 @@ const AdminPage = () => {
         hover:-translate-y-1
       "
     >
-      {/* Header with subtle accent */}
-      <div className="mb-4 pb-3 border-b  border-gray-100">
-        <h2 className="text-xl font-semibold f  bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text flex justify-center capitalize items-center">
-          <span className="w-1.5 h-1.5 bg-blue-dark rounded-full mr-2 mt-1  "></span>
-          {user.fullname}
-        </h2>
-      </div>
 
       {/* User details grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-sm overflow-wrap break-words">
+      <div className="grid  grid-cols-1 mb-14 md:grid-cols-2 gap-5 text-sm overflow-wrap break-words">
         {[
           { label: "Name", value: user.fullname, icon: <MdEmail /> },
           { label: "Email", value: user.email, icon: "✉️" },
@@ -149,7 +145,7 @@ const AdminPage = () => {
       </div>
 
       {/* Answers section */}
-      <div className="mt-6 pt-4 border-t border-gray-100">
+      {/* <div className="mt-6 pt-4 border-t border-gray-100">
         <h3 className="
           font-semibold mb-3 
           text-indigo-700 flex items-center
@@ -182,7 +178,19 @@ const AdminPage = () => {
             </li>
           ))}
         </ul>
-      </div>
+      </div> */}
+
+       <Button
+      size="sm"
+
+      className="mt-4 bg-gradient-to-r cursor-pointer from-blue-dark to-indigo-700 hover:bg-blue-dark  absolute bottom-4  left-3 right-3 "
+      onClick={() => {
+        setSelectedUser(user);
+        setShowUserDialog(true);
+      }}
+    >
+      View Full Details
+    </Button>
     </div>
   ))}
 </div>
@@ -203,6 +211,55 @@ const AdminPage = () => {
           </ScrollArea>
         </DialogContent>
       </Dialog>
+
+      <Dialog open={showUserDialog} onOpenChange={setShowUserDialog}>
+  <DialogContent className="max-h-[90vh] overflow-hidden">
+    {selectedUser && (
+      <div className="text-sm space-y-4">
+        <h2 className="text-xl font-bold bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text">
+          {selectedUser.fullname}
+        </h2>
+        {/* Answers */}
+     <ScrollArea className="mt-4 h-[80vh] pr-2 pb-8 md:pb-6 pt-2 border-t border-gray-200">
+  <h3 className="font-semibold text-indigo-700 mb-2">Answers</h3>
+  <ul className="space-y-4">
+    {parseAnswers(selectedUser.answersArray).slice(0, 4).map((item: any, index: number) => (
+      <li key={index}>
+        <p className="font-medium text-gray-800">{item.question}</p>
+        <p className="text-gray-600">{item.answer}</p>
+      </li>
+    ))}
+
+    {/* Last two questions - show answers as chips */}
+    {parseAnswers(selectedUser.answersArray).slice(4).map((item: any, index: number) => (
+      <li key={index + 3}>
+        <p className="font-medium text-gray-800">{item.question}</p>
+        {
+          item.answer?( <div className="flex flex-wrap gap-2  mt-1">
+          {item.answer.split(',').map((chip: string, chipIndex: number) => (
+            <span
+              key={chipIndex}
+              className="bg-indigo-50 text-blue-dark text-sm font-normal  px-3 py-1 rounded-full"
+            >
+              {chip.trim()}
+            </span>
+          ))}
+        </div>):(
+            <p>User did not provide answer of this question</p>
+          )
+        }
+
+      </li>
+    ))}
+  </ul>
+</ScrollArea>
+
+
+      </div>
+    )}
+  </DialogContent>
+</Dialog>
+
     </div>
   );
 };

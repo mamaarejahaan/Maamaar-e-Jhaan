@@ -8,6 +8,8 @@ import { useAuthStore } from "./zustand/authStore";
 import { account } from "./appwrite/appwrite";
 import AdminAccessPage from "./pages/AdminAccessPage";
 import AnnouncementPage from "./pages/AnnouncementPage";
+import EventsActivitiesPage from "./pages/EventsActivitiesPage";
+import AdminAnnouncementPage from "./pages/AdminAnnouncementPage";
 
 
 function App() {
@@ -40,6 +42,8 @@ function App() {
       <Route path="/" element={<HomePage />} />
         <Route path="/admin" element={<AdminAccessPage />} />
          <Route path="/announcement" element={<AnnouncementPage />} />
+         <Route path="/admin-announcement" element={<AdminAnnouncementPage />} />
+           <Route path="/events-and-activities" element={<EventsActivitiesPage />} />
       </Routes>
      </div>
    

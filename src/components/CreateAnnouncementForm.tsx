@@ -20,8 +20,9 @@ type FormData = z.infer<typeof formSchema>;
 
 interface Props{
     setIsAnnouncementOpen:(val:boolean)=>void
+    fetchAnnouncements?:()=>void
 }
-const CreateAnnouncementForm:React.FC<Props> = ({setIsAnnouncementOpen}) => {
+const CreateAnnouncementForm:React.FC<Props> = ({setIsAnnouncementOpen,fetchAnnouncements}) => {
 
 
   const {
@@ -46,9 +47,12 @@ const CreateAnnouncementForm:React.FC<Props> = ({setIsAnnouncementOpen}) => {
         description: data.description,
         googleFormURL: data.url,
         imageURL:uploadedURL,
+        imageFileId:uploadedFile.$id
+
       });
 
       toast.success('Announcement created!');
+      fetchAnnouncements && fetchAnnouncements()
       reset();
       setIsAnnouncementOpen(false)
     } catch (err: any) {
