@@ -3,7 +3,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { databases, storage } from "@/appwrite/appwrite";
 import conf from "@/appwrite/conf";
-import { CustomPageLoader } from "@/components/loader";
+import CustomLoader, { CustomPageLoader } from "@/components/loader";
 import {  useNavigate } from "react-router-dom";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Navbar from "@/components/Navbar";
@@ -190,8 +190,10 @@ const AdminAnnouncementPage = () => {
           type="button"
           disabled={isDeleting}
           onClick={()=>DeleteAnnouncedment()}
-          className="bg-red-600 hover:bg-red-700 cursor-pointer"
-          >Continue</AlertDialogAction>
+          className="bg-red-600 hover:bg-red-700 md:w-24 cursor-pointer"
+          >
+            {isDeleting?<CustomLoader />:"Delete"}
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

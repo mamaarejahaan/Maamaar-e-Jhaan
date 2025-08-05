@@ -1,7 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination,Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
+import { Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/swiper-bundle.css';
 import Navbar from '@/components/Navbar';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
