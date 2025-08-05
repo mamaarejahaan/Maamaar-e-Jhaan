@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Autoplay } from 'swiper/modules';
+import { Pagination } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
 import Navbar from '@/components/Navbar';
 import { useNavigate } from 'react-router-dom';
@@ -76,12 +76,12 @@ const EventsActivitiesPage = () => {
           </h2>
 
           <Swiper
-            modules={[Pagination,Autoplay]}
+            modules={[Pagination]}
             pagination={{ clickable: true }}
-              autoplay={{
-    delay: 3000, // 3 seconds delay between slides
-    disableOnInteraction: false, // Keeps autoplay active even after user interaction
-  }}
+  //             autoplay={{
+  //   delay: 3000, // 3 seconds delay between slides
+  //   disableOnInteraction: false, // Keeps autoplay active even after user interaction
+  // }}
             spaceBetween={10}
             breakpoints={{
               0: {
@@ -118,12 +118,12 @@ const EventsActivitiesPage = () => {
           </h2>
 
           <Swiper
-            modules={[Pagination,Autoplay]}
+            modules={[Pagination]}
             pagination={{ clickable: true }}
-              autoplay={{
-    delay: 3000, // 3 seconds delay between slides
-    disableOnInteraction: true, // Keeps autoplay inactive even after user interaction
-  }}
+  //             autoplay={{
+  //   delay: 3000, // 3 seconds delay between slides
+  //   disableOnInteraction: true, // Keeps autoplay inactive even after user interaction
+  // }}
             spaceBetween={10}
             breakpoints={{
               0: {
