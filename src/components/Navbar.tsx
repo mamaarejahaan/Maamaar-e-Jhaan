@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 // import { MdKeyboardArrowDown } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
@@ -16,6 +16,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import JoinUsForm from "./JoinUsForm";
 import { Separator } from "./ui/separator";
 import { ScrollArea } from "./ui/scroll-area";
+import { databases } from "@/appwrite/appwrite";
+import conf from "@/appwrite/conf";
 
 
 const Events=["Students Welcome","Welcome Dinner","MUN (Model United Nation)","Palestine walk","Grand iftar","Med doc","Andaz e byan","Story night",
@@ -29,9 +31,26 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const location=useLocation()
  const [isOpen,setIsOpen]=useState(false)
+ const [showJoin, setShowJoin] = useState(false);
+ useEffect(()=>{
+   const fetchShowJoin = async () => {
+      try {
+        const res = await databases.getDocument(
+          conf.appwriteDatabaseId,
+          conf.appwriteSettingCollectionId,
+          conf.appwriteSettingDocumentId
+        );
+        setShowJoin(res.joinusVisibility);
+      } catch (err) {
+        console.error("Error fetching Join setting:", err);
+      }
+    };
+    fetchShowJoin()
+ },[])
+    
  const [isJoinFormOpen,setIsJoinFormOpen]=useState(false)
   return (
-    <div className="fixed top-0 left-0 right-0 bg-white shadow-md px-4 md:px-16 py-2 md:py-4 z-50">
+    <div className="fixed top-0 left-0 right-0 w-screen bg-white shadow-md px-4 md:px-16 py-2 md:py-4 z-50">
       <div className="flex justify-between gap-5 items-center">
         <Link to="/" className="bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text text-3xl font-bold flex items-center space-x-2">
           <img src="Logo.png" alt="Logo" className="h-10 w-10" />
@@ -92,7 +111,9 @@ const Navbar = () => {
       </div>
     </li>
     <li><Link to="/explore-smc" onClick={() => setMenuOpen(false)}>Explore SMC</Link></li>
-    <li className="cursor-pointer list-none" onClick={() => setIsOpen(true)}>Join Us</li>
+    {
+      showJoin &&  <li className="cursor-pointer list-none" onClick={() => setIsOpen(true)}>Join Us</li>
+    }
     <li><a href="#contact">Contact Us</a></li>
   </ul>
 </nav>
@@ -167,7 +188,9 @@ const Navbar = () => {
           setMenuOpen(false)
           setMenuOpen(false)
         }}>Explore SMC</Link>
-    <li
+  {
+    showJoin && (
+        <li
       className="border-b list-none cursor-pointer border-gray-200 pb-2 hover:text-blue-700"
       onClick={() => {
         setMenuOpen(false)
@@ -176,6 +199,8 @@ const Navbar = () => {
     >
       Join Us
     </li>
+    )
+  }
     <a
       href="#contact"
       className="hover:text-blue-700"

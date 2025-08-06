@@ -12,6 +12,9 @@ import ChangePasswordForm from "@/components/ChangePasswordForm";
 import conf from "@/appwrite/conf";
 import CreateAnnouncementForm from "@/components/CreateAnnouncementForm";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import toast from "react-hot-toast";
 
 
 const AdminPage = () => {
@@ -22,8 +25,22 @@ const AdminPage = () => {
 const [showUserDialog, setShowUserDialog] = useState(false);
   const [isAnnouncementOpen,setIsAnnouncementOpen]=useState(false)
   const [loading, setLoading] = useState(true);
+    const [showJoin, setShowJoin] = useState(false);
+      const [joinLoading, setJoinLoading] = useState(false);
 
    useEffect(() => {
+        const fetchShowJoin = async () => {
+      try {
+        const res = await databases.getDocument(
+          conf.appwriteDatabaseId,
+          conf.appwriteSettingCollectionId,
+          conf.appwriteSettingDocumentId
+        );
+        setShowJoin(res.joinusVisibility);
+      } catch (err) {
+        console.error("Error fetching Join setting:", err);
+      }
+    };
     const fetchUsers = async () => {
       try {
         setLoading(true)
@@ -40,7 +57,7 @@ const [showUserDialog, setShowUserDialog] = useState(false);
         setLoading(false)
       }
     };
-
+    fetchShowJoin()
     fetchUsers();
   }, []);
 
@@ -49,6 +66,29 @@ const [showUserDialog, setShowUserDialog] = useState(false);
       return JSON.parse(answers);
     } catch {
       return [];
+    }
+  };
+
+    const handleJoinToggle = async () => {
+      const toastId=toast.loading("toggling...")
+    try {
+      setJoinLoading(true)
+      const updated = await databases.updateDocument(
+        conf.appwriteDatabaseId,
+        conf.appwriteSettingCollectionId,
+        conf.appwriteSettingDocumentId,
+        {
+          joinusVisibility: !showJoin,
+        }
+      );
+      setShowJoin(updated.joinusVisibility);
+      toast.success("Toggled successfully",{id:toastId})
+    } catch (err) {
+      console.error("Error updating Join toggle:", err);
+      toast.error("Failed to toggle",{id:toastId})
+    } 
+    finally{
+      setJoinLoading(false)
     }
   };
 
@@ -88,9 +128,20 @@ const [showUserDialog, setShowUserDialog] = useState(false);
             Change Password
           </Button>
           </div>
+                  <div className="flex items-center justify-end m space-x-2 mt-4 md:mt-0 w-full md:w-fit
+                  ">
+          <Label htmlFor="join-toggle" className="text-sm text-gray-700 Form">{
+            showJoin?"Hide":"Show"} “Join Us Form”</Label>
+          <Switch
+            id="join-toggle"
+            checked={showJoin}
+            onCheckedChange={handleJoinToggle}
+            disabled={joinLoading}
+          />
+        </div>
         </div>
 
-        <h1 className="text-2xl md:text-3xl mt-10  md:mt-0 font-semibold text-center bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text mb-8">
+        <h1 className="text-2xl md:text-3xl mt-10  md:mt-20 font-semibold text-center bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text mb-8">
           Admin Panel - All Requests ({users?.length})
         </h1>
 
@@ -232,109 +283,3 @@ const [showUserDialog, setShowUserDialog] = useState(false);
 
 export default AdminPage;
 
-// import  { useEffect, useState } from "react";
-
-// import { Loader2 } from "lucide-react";
-// import { Badge } from "@/components/ui/badge";
-// import { Switch } from "@/components/ui/switch";
-// import { Label } from "@/components/ui/label";
-// import { databases } from "@/appwrite/appwrite";
-// import conf from "@/appwrite/conf";
-
-// const AdminPage = () => {
-//   const [allData, setAllData] = useState<any>([]);
-//   const [loading, setLoading] = useState(true);
-//   const [showJoin, setShowJoin] = useState(false);
-//   const [joinLoading, setJoinLoading] = useState(false);
-
-//   useEffect(() => {
-//     const fetchShowJoin = async () => {
-//       try {
-//         const res = await databases.getDocument(
-//           conf.appwriteDatabaseId,
-//           conf.appwriteSettingCollectionId,
-//           conf.appwriteSettingDocumentId
-//         );
-//         setShowJoin(res.shouldShowJoin);
-//       } catch (err) {
-//         console.error("Error fetching Join setting:", err);
-//       }
-//     };
-
-//     const fetchAllData = async () => {
-//       try {
-//         const response = await databases.listDocuments(
-//           conf.appwriteDatabaseId,
-//           conf.appwriteCollectionId
-//         );
-//         setAllData(response.documents);
-//         setLoading(false);
-//       } catch (error) {
-//         console.error("Error fetching data:", error);
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchShowJoin();
-//     fetchAllData();
-//   }, []);
-
-//   const handleJoinToggle = async () => {
-//     try {
-//       setJoinLoading(true);
-//       const updated = await databases.updateDocument(
-//         conf.appwriteDatabaseId,
-//         "settings",
-//         "join_visibility",
-//         {
-//           shouldShowJoin: !showJoin,
-//         }
-//       );
-//       setShowJoin(updated.shouldShowJoin);
-//     } catch (err) {
-//       console.error("Error updating Join toggle:", err);
-//     } finally {
-//       setJoinLoading(false);
-//     }
-//   };
-
-//   return (
-//     <div className="px-2 md:px-10 py-6">
-//       <div className="flex items-center justify-between mb-6">
-//         <h1 className="text-2xl md:text-3xl font-semibold">Admin Panel - All Requests</h1>
-
-//         <div className="flex items-center space-x-2">
-//           <Label htmlFor="join-toggle" className="text-sm text-gray-700">Show “Join Us”</Label>
-//           <Switch
-//             id="join-toggle"
-//             checked={showJoin}
-//             onCheckedChange={handleJoinToggle}
-//             disabled={joinLoading}
-//           />
-//         </div>
-//       </div>
-
-//       {loading ? (
-//         <div className="flex justify-center items-center py-10">
-//           <Loader2 className="animate-spin h-6 w-6 text-primary" />
-//         </div>
-//       ) : (
-//         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-//           {allData.map((item:any) => (
-//             <div key={item.$id} className="bg-white border rounded-lg shadow p-4 space-y-2">
-//               <h2 className="text-xl font-semibold">{item.name}</h2>
-//               <p><span className="font-semibold">Email:</span> {item.email}</p>
-//               <p><span className="font-semibold">Phone:</span> {item.phone}</p>
-//               <p><span className="font-semibold">City:</span> {item.city}</p>
-//               <p><span className="font-semibold">Age:</span> {item.age}</p>
-//               <p><span className="font-semibold">Reason:</span> {item.reason}</p>
-//               <Badge className="w-fit">{item.gender}</Badge>
-//             </div>
-//           ))}
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default AdminPage;
