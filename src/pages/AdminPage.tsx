@@ -144,41 +144,7 @@ const [showUserDialog, setShowUserDialog] = useState(false);
         ))}
       </div>
 
-      {/* Answers section */}
-      {/* <div className="mt-6 pt-4 border-t border-gray-100">
-        <h3 className="
-          font-semibold mb-3 
-          text-indigo-700 flex items-center
-        ">
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            className="h-5 w-5 mr-2 mt-0.5" 
-            viewBox="0 0 20 20" 
-            fill="currentColor"
-          >
-            <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-          </svg>
-          Answers
-        </h3>
-        <ul className="space-y-3">
-          {parseAnswers(user.answersArray).map((item: any, index: number) => (
-            <li 
-              key={index} 
-              className="
-                p-3 bg-gray-50 rounded-lg
-                 transition-colors
-                border border-gray-100
-              "
-            >
-              <p className="font-medium text-gray-700 flex items-start">
-                <span className="bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text mr-2">•</span>
-                {item.question}
-              </p>
-              <p className="text-gray-700 mt-1 pl-5">{item.answer}</p>
-            </li>
-          ))}
-        </ul>
-      </div> */}
+   
 
        <Button
       size="sm"
@@ -265,3 +231,110 @@ const [showUserDialog, setShowUserDialog] = useState(false);
 };
 
 export default AdminPage;
+
+// import  { useEffect, useState } from "react";
+
+// import { Loader2 } from "lucide-react";
+// import { Badge } from "@/components/ui/badge";
+// import { Switch } from "@/components/ui/switch";
+// import { Label } from "@/components/ui/label";
+// import { databases } from "@/appwrite/appwrite";
+// import conf from "@/appwrite/conf";
+
+// const AdminPage = () => {
+//   const [allData, setAllData] = useState<any>([]);
+//   const [loading, setLoading] = useState(true);
+//   const [showJoin, setShowJoin] = useState(false);
+//   const [joinLoading, setJoinLoading] = useState(false);
+
+//   useEffect(() => {
+//     const fetchShowJoin = async () => {
+//       try {
+//         const res = await databases.getDocument(
+//           conf.appwriteDatabaseId,
+//           conf.appwriteSettingCollectionId,
+//           conf.appwriteSettingDocumentId
+//         );
+//         setShowJoin(res.shouldShowJoin);
+//       } catch (err) {
+//         console.error("Error fetching Join setting:", err);
+//       }
+//     };
+
+//     const fetchAllData = async () => {
+//       try {
+//         const response = await databases.listDocuments(
+//           conf.appwriteDatabaseId,
+//           conf.appwriteCollectionId
+//         );
+//         setAllData(response.documents);
+//         setLoading(false);
+//       } catch (error) {
+//         console.error("Error fetching data:", error);
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchShowJoin();
+//     fetchAllData();
+//   }, []);
+
+//   const handleJoinToggle = async () => {
+//     try {
+//       setJoinLoading(true);
+//       const updated = await databases.updateDocument(
+//         conf.appwriteDatabaseId,
+//         "settings",
+//         "join_visibility",
+//         {
+//           shouldShowJoin: !showJoin,
+//         }
+//       );
+//       setShowJoin(updated.shouldShowJoin);
+//     } catch (err) {
+//       console.error("Error updating Join toggle:", err);
+//     } finally {
+//       setJoinLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="px-2 md:px-10 py-6">
+//       <div className="flex items-center justify-between mb-6">
+//         <h1 className="text-2xl md:text-3xl font-semibold">Admin Panel - All Requests</h1>
+
+//         <div className="flex items-center space-x-2">
+//           <Label htmlFor="join-toggle" className="text-sm text-gray-700">Show “Join Us”</Label>
+//           <Switch
+//             id="join-toggle"
+//             checked={showJoin}
+//             onCheckedChange={handleJoinToggle}
+//             disabled={joinLoading}
+//           />
+//         </div>
+//       </div>
+
+//       {loading ? (
+//         <div className="flex justify-center items-center py-10">
+//           <Loader2 className="animate-spin h-6 w-6 text-primary" />
+//         </div>
+//       ) : (
+//         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+//           {allData.map((item:any) => (
+//             <div key={item.$id} className="bg-white border rounded-lg shadow p-4 space-y-2">
+//               <h2 className="text-xl font-semibold">{item.name}</h2>
+//               <p><span className="font-semibold">Email:</span> {item.email}</p>
+//               <p><span className="font-semibold">Phone:</span> {item.phone}</p>
+//               <p><span className="font-semibold">City:</span> {item.city}</p>
+//               <p><span className="font-semibold">Age:</span> {item.age}</p>
+//               <p><span className="font-semibold">Reason:</span> {item.reason}</p>
+//               <Badge className="w-fit">{item.gender}</Badge>
+//             </div>
+//           ))}
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default AdminPage;

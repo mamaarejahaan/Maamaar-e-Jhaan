@@ -5,6 +5,8 @@ const conf={
  appwriteCollectionId:String(import.meta.env.VITE_APPWRITE_COLLECTION_ID),
  appwriteBucketId:String(import.meta.env.VITE_APPWRITE_BUCKET_ID),
  appwriteAnnouncementCollectionId:String(import.meta.env.VITE_APPWRITE_ANNOUNCEMENT_COLLECTION_ID),
+ appwriteSettingCollectionId:String(import.meta.env.VITE_APPWRITE_SETTING_COLLECTION_ID),
+ appwriteSettingDocumentId:String(import.meta.env.VITE_APPWRITE_SETTING_DOCUMENT_ID),
  emailjsServiceId:String(import.meta.env.VITE_EMAIL_JS_SERVICE_ID),
  emailjsTemplateId:String(import.meta.env.VITE_EMAIL_JS_TEMPLATE_ID),
  emailjsPublicKey:String(import.meta.env.VITE_EMAIL_JS_PUBLIC_KEY),
