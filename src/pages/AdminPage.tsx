@@ -15,9 +15,11 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
+import { useAuthStore } from "@/zustand/authStore";
 
 
 const AdminPage = () => {
+  const {showJoinUs,setShowJoinUs}=useAuthStore()
   const navigate = useNavigate();
   const [users, setUsers] = useState<any>([]);
   const [isOpen,setIsOpen]=useState(false)
@@ -25,22 +27,22 @@ const AdminPage = () => {
 const [showUserDialog, setShowUserDialog] = useState(false);
   const [isAnnouncementOpen,setIsAnnouncementOpen]=useState(false)
   const [loading, setLoading] = useState(true);
-    const [showJoin, setShowJoin] = useState(false);
       const [joinLoading, setJoinLoading] = useState(false);
 
    useEffect(() => {
-        const fetchShowJoin = async () => {
-      try {
-        const res = await databases.getDocument(
-          conf.appwriteDatabaseId,
-          conf.appwriteSettingCollectionId,
-          conf.appwriteSettingDocumentId
-        );
-        setShowJoin(res.joinusVisibility);
-      } catch (err) {
-        console.error("Error fetching Join setting:", err);
-      }
-    };
+    //     const fetchShowJoin = async () => {
+    //   try {
+    //     const res = await databases.getDocument(
+    //       conf.appwriteDatabaseId,
+    //       conf.appwriteSettingCollectionId,
+    //       conf.appwriteSettingDocumentId
+    //     );
+    //     console.log("response",res)
+    //     setShowJoinUs(res.joinusVisibility);
+    //   } catch (err) {
+    //     console.error("Error fetching Join setting:", err);
+    //   }
+    // };
     const fetchUsers = async () => {
       try {
         setLoading(true)
@@ -57,7 +59,8 @@ const [showUserDialog, setShowUserDialog] = useState(false);
         setLoading(false)
       }
     };
-    fetchShowJoin()
+    // fetchShowJoin()
+    console.log("join",showJoinUs)
     fetchUsers();
   }, []);
 
@@ -78,10 +81,11 @@ const [showUserDialog, setShowUserDialog] = useState(false);
         conf.appwriteSettingCollectionId,
         conf.appwriteSettingDocumentId,
         {
-          joinusVisibility: !showJoin,
+          joinusVisibility: !showJoinUs,
         }
       );
-      setShowJoin(updated.joinusVisibility);
+      console.log("udpated",updated)
+      setShowJoinUs(updated.joinusVisibility);
       toast.success("Toggled successfully",{id:toastId})
     } catch (err) {
       console.error("Error updating Join toggle:", err);
@@ -131,10 +135,10 @@ const [showUserDialog, setShowUserDialog] = useState(false);
                   <div className="flex items-center justify-end m space-x-2 mt-4 md:mt-0 w-full md:w-fit
                   ">
           <Label htmlFor="join-toggle" className="text-sm text-gray-700 Form">{
-            showJoin?"Hide":"Show"} “Join Us Form”</Label>
+            showJoinUs?"Hide":"Show"} “Join Us Form”</Label>
           <Switch
             id="join-toggle"
-            checked={showJoin}
+            checked={showJoinUs}
             onCheckedChange={handleJoinToggle}
             disabled={joinLoading}
           />

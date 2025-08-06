@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { Menu, X } from "lucide-react";
 // import { MdKeyboardArrowDown } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
@@ -16,8 +16,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import JoinUsForm from "./JoinUsForm";
 import { Separator } from "./ui/separator";
 import { ScrollArea } from "./ui/scroll-area";
-import { databases } from "@/appwrite/appwrite";
-import conf from "@/appwrite/conf";
+import { useAuthStore } from "@/zustand/authStore";
 
 
 const Events=["Students Welcome","Welcome Dinner","MUN (Model United Nation)","Palestine walk","Grand iftar","Med doc","Andaz e byan","Story night",
@@ -31,22 +30,7 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const location=useLocation()
  const [isOpen,setIsOpen]=useState(false)
- const [showJoin, setShowJoin] = useState(false);
- useEffect(()=>{
-   const fetchShowJoin = async () => {
-      try {
-        const res = await databases.getDocument(
-          conf.appwriteDatabaseId,
-          conf.appwriteSettingCollectionId,
-          conf.appwriteSettingDocumentId
-        );
-        setShowJoin(res.joinusVisibility);
-      } catch (err) {
-        console.error("Error fetching Join setting:", err);
-      }
-    };
-    fetchShowJoin()
- },[])
+ const {showJoinUs}=useAuthStore()
     
  const [isJoinFormOpen,setIsJoinFormOpen]=useState(false)
   return (
@@ -112,7 +96,7 @@ const Navbar = () => {
     </li>
     <li><Link to="/explore-smc" onClick={() => setMenuOpen(false)}>Explore SMC</Link></li>
     {
-      showJoin &&  <li className="cursor-pointer list-none" onClick={() => setIsOpen(true)}>Join Us</li>
+      showJoinUs &&  <li className="cursor-pointer list-none" onClick={() => setIsOpen(true)}>Join Us</li>
     }
     <li><a href="#contact">Contact Us</a></li>
   </ul>
@@ -189,7 +173,7 @@ const Navbar = () => {
           setMenuOpen(false)
         }}>Explore SMC</Link>
   {
-    showJoin && (
+    showJoinUs && (
         <li
       className="border-b list-none cursor-pointer border-gray-200 pb-2 hover:text-blue-700"
       onClick={() => {

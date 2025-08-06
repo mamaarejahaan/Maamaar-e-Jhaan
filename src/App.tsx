@@ -5,16 +5,17 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useAuthStore } from "./zustand/authStore";
-import { account } from "./appwrite/appwrite";
+import { account, databases } from "./appwrite/appwrite";
 import AdminAccessPage from "./pages/AdminAccessPage";
 import AnnouncementPage from "./pages/AnnouncementPage";
 import EventsActivitiesPage from "./pages/EventsActivitiesPage";
 import AdminAnnouncementPage from "./pages/AdminAnnouncementPage";
 import ExploreSMCPage from "./pages/ExploreSMCPage";
+import conf from "./appwrite/conf";
 
 
 function App() {
- const {setSession}=useAuthStore()
+ const {setSession,setShowJoinUs}=useAuthStore()
   useEffect(() => {
   AOS.init({
     duration: 800, 
@@ -30,6 +31,19 @@ function App() {
     setSession(null)
    }
   }
+   const fetchShowJoin = async () => {
+      try {
+        const res = await databases.getDocument(
+          conf.appwriteDatabaseId,
+          conf.appwriteSettingCollectionId,
+          conf.appwriteSettingDocumentId
+        );
+        setShowJoinUs(res.joinusVisibility);
+      } catch (err) {
+        console.error("Error fetching Join setting:", err);
+      }
+    };
+    fetchShowJoin()
   checkAuth()
 }, []);
 
