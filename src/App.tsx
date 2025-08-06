@@ -10,6 +10,7 @@ import AdminAccessPage from "./pages/AdminAccessPage";
 import AnnouncementPage from "./pages/AnnouncementPage";
 import EventsActivitiesPage from "./pages/EventsActivitiesPage";
 import AdminAnnouncementPage from "./pages/AdminAnnouncementPage";
+import ExploreSMCPage from "./pages/ExploreSMCPage";
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
          <Route path="/announcement" element={<AnnouncementPage />} />
          <Route path="/admin-announcement" element={<AdminAnnouncementPage />} />
            <Route path="/events-and-activities" element={<EventsActivitiesPage />} />
+            <Route path="/explore-smc" element={<ExploreSMCPage />} />
       </Routes>
      </div>
    

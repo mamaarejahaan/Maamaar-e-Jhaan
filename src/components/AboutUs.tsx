@@ -306,11 +306,12 @@ const goals = [
 ];
 
 const team = [
-  // {
-  //   title: "President",
-  //   name: "Maaz Javaid",
-  //   description: `Study resources, tutoring, workshops\nCareer counseling & field guidance\nAdmission & scholarship guidance`,
-  // },
+ {
+    title: "Leadership & Training",
+    name: "Br. Sher Ali",
+    img:"/SherAli.JPG",
+    description: `Skill development, workshops\nPublic speaking, project handling`,
+  },
   {
     title: "Education & Academics",
     name: "Anees Ahmad",
@@ -344,20 +345,20 @@ const team = [
   {
     title: "Events & Outreach",
     name: "Sikandar",
-    // img:"/RafeyFeroz.jpeg",
+     img:"/Sikandar.jpeg",
     description: `Organizing seminars, competitions, public events\nManaging collaborations with other bodies`,
-  },
-  {
-    title: "Leadership & Training",
-    name: "Br. Sher Ali",
-    img:"/SherAli.JPG",
-    description: `Skill development, workshops\nPublic speaking, project handling`,
   },
   {
     title: "Finance",
     name: "Faizan Rauf",
     img:"/Faizan.jpeg",
     description: `Budgeting, funding, logistics`,
+  },
+  {
+    title: "Female Wing",
+    name: "Maamaar-e-Jhaan",
+    img:"/Logo.png",
+    // description: `Budgeting, funding, logistics`,
   },
 ];
 
@@ -434,7 +435,7 @@ const AboutUs = () => {
               <div className="relative z-20">
                 <div className="w-28 h-28 mx-auto bg-gray-200 rounded-full mb-4 flex items-center justify-center text-gray-500 text-xl font-semibold">
                  {
-                  member?.img ?( <img src={member.img} className="w-full h-full object-contain rounded-full" />):(
+                  member?.img ?( <img src={member.img} className="w-full h-full object-contain object-center rounded-full" />):(
                    member.name[0].toUpperCase()
                   )
                  }

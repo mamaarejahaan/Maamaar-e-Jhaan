@@ -50,7 +50,9 @@ const Navbar = () => {
     }
 
        {
-        (location.pathname!=="/admin" && location.pathname!=="/announcement" && location.pathname!=="/admin-announcement" && location.pathname!=="/events-and-activities") && (
+        (location.pathname!=="/admin" && location.pathname!=="/announcement" && location.pathname!=="/admin-announcement" && location.pathname!=="/events-and-activities"
+          && location.pathname!=="/admin-announcement" && location.pathname!=="/explore-smc"
+        ) && (
          <>
           {/* Desktop Menu */}
        <nav className="hidden lg:flex">
@@ -89,7 +91,7 @@ const Navbar = () => {
         </ul>
       </div>
     </li>
-
+    <li><Link to="/explore-smc" onClick={() => setMenuOpen(false)}>Explore SMC</Link></li>
     <li className="cursor-pointer list-none" onClick={() => setIsOpen(true)}>Join Us</li>
     <li><a href="#contact">Contact Us</a></li>
   </ul>
@@ -105,7 +107,9 @@ const Navbar = () => {
       </div>
 
  {
-  (location.pathname!=="/admin" && location.pathname!=="/announcement" && location.pathname!=="/announcement" && location.pathname!=="/admin-announcement" && location.pathname!=="/events-and-activities") && (
+  (location.pathname!=="/admin" && location.pathname!=="/announcement" && location.pathname!=="/announcement" && location.pathname!=="/admin-announcement" && location.pathname!=="/events-and-activities"
+    && location.pathname!=="/explore-smc"
+  ) && (
     <>
       {menuOpen && (
   <div className="lg:hidden absolute top-16 md:top-20 left-4 right-4 z-50 bg-white rounded-lg shadow-lg p-6 flex flex-col space-y-4 transition-all duration-300 text-blue-dark font-medium">
@@ -141,7 +145,6 @@ const Navbar = () => {
     >
       Collaborator
     </a>
-    {/* <div className="flex gap-1 border-b border-gray-200 pb-2"> */}
     <a
       href="#resources"
       className="border-b border-gray-200 pb-2 hover:text-blue-700"
@@ -158,6 +161,12 @@ const Navbar = () => {
     >
       Events & Activities
     </Link>
+            <Link to="/explore-smc"
+           className="border-b border-gray-200 pb-2 hover:text-blue-700"
+        onClick={() => {
+          setMenuOpen(false)
+          setMenuOpen(false)
+        }}>Explore SMC</Link>
     <li
       className="border-b list-none cursor-pointer border-gray-200 pb-2 hover:text-blue-700"
       onClick={() => {

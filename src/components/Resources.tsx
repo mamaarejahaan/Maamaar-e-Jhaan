@@ -280,14 +280,14 @@ const Resources = () => {
             Complement your studies with our curated video lectures and tutorials covering all major subjects.
           </p>
           <Link
-            to="https://www.youtube.com/playlist?list=YOUR_PLAYLIST_ID"
+            to="https://youtube.com/@mamaarejahaan?si=xpmgkB1m9og7u84Z"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center"
           >
             <Button className="hover:scale-105 cursor-pointer transition-transform bg-white text-blue-600 hover:bg-white/90 shadow-md font-medium flex gap-2 items-center px-6 py-5">
               <Play className="w-5 h-5" />
-              Watch Video Playlist
+              Watch Youtube Channel
             </Button>
           </Link>
         </div>

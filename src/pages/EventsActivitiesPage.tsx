@@ -14,16 +14,19 @@ const EventsActivitiesPage = () => {
   },[])
 
    const Events = [
-    { name: "Students Welcome", images: ["/StudentBatch1.jpeg", "/StudentBatch2.jpeg", "/StudentBatch3.jpeg", "/StudentBatch4.jpeg","/StudentBatch5.jpeg", "/StudentBatch6.jpeg", "/StudentBatch7.jpeg", "/StudentBatch8.jpeg"] },
+    
+    { name: "Med Doc", images: ["/MedDoc1.jpeg", "/MedDoc2.jpeg", "/MedDoc3.jpeg", "/MedDoc4.jpeg","/MedDoc5.jpeg", "/MedDoc6.jpeg", "/MedDoc7.jpeg", "/MedDoc8.jpeg","/MedDoc9.jpeg","/MedDoc9.jpeg"] },
+    { name: "Grand Iftar", images: ["/Grandiftar1.jpeg", "/Grandiftar2.jpeg", "/Grandiftar3.jpeg", "/Grandiftar4.jpeg", "/Grandiftar5.jpeg","/Grandiftar6.jpeg","/Grandiftar7.jpeg","/Grandiftar8.jpeg"] },
     { name: "Welcome Dinner", images: ["/Dinner1.jpeg", "/Dinner2.jpeg", "/Dinner3.jpeg", "/Dinner4.jpeg"] },
+    { name: "Students Welcome", images: ["/StudentBatch1.jpeg", "/StudentBatch2.jpeg", "/StudentBatch3.jpeg", "/StudentBatch4.jpeg","/StudentBatch5.jpeg", "/StudentBatch6.jpeg", "/StudentBatch7.jpeg", "/StudentBatch8.jpeg"] },
     { name: "Story Night", images: ["/Storynight1.jpeg", "/Storynight2.jpeg","/Storynight3.jpeg","/Storynight4.jpeg"] },
     { name: "Andaz e Byan", images: ["/AndazeByan1.jpeg", "/AndazeByan2.jpeg", "/AndazeByan3.jpeg", "/AndazeByan4.jpeg","/AndazeByan5.jpeg"] },
-    { name: "Grand Iftar", images: ["/Grandiftar1.jpeg", "/Grandiftar2.jpeg", "/Grandiftar3.jpeg", "/Grandiftar4.jpeg", "/Grandiftar5.jpeg","/Grandiftar6.jpeg","/Grandiftar7.jpeg","/Grandiftar8.jpeg"] },
-    { name: "Med Doc", images: ["/MedDoc1.jpeg", "/MedDoc2.jpeg", "/MedDoc3.jpeg", "/MedDoc4.jpeg","/MedDoc5.jpeg", "/MedDoc6.jpeg", "/MedDoc7.jpeg", "/MedDoc8.jpeg","/MedDoc9.jpeg","/MedDoc9.jpeg"] },
     { name: "MUN (Model United Nation)", images: ["/MUN1.jpeg", "/MUN2.jpeg", "/MUN3.jpeg", "/MUN4.jpeg","/MUN5.jpeg","/MUN6.jpeg"] },
+    { name: "Palestine Conference", images: ["/Palestine1.jpeg", "/Palestine2.jpeg","/Palestine3.jpeg", "/Palestine4.jpeg","/Palestine5.jpeg", "/Palestine6.jpeg","/Palestine7.jpeg", "/Palestine8.jpeg","/Palestine9.jpeg"] },
+    { name: "Palestine Walk", images: ["/PalestineWalk1.jpeg", "/PalestineWalk2.jpeg","/PalestineWalk3.jpeg", "/PalestineWalk4.jpeg","/PalestineWalk5.jpeg", "/PalestineWalk6.jpeg","/PalestineWalk7.jpeg"] },
+    { name: "Palestine Wall", images: ["/PalestineWall1.jpeg", "/PalestineWall2.jpeg","/PalestineWall3.jpeg", "/PalestineWall4.jpeg","/PalestineWall5.jpeg", "/PalestineWall6.jpeg","/PalestineWall7.jpeg", "/PalestineWall8.jpeg","/PalestineWall9.jpeg", "/PalestineWall10.jpeg"] },
     { name: "Online Sessions and Seminars", images: ["/Seminar1.jpeg", "/Seminar2.jpeg", "/Seminar3.jpeg", "/Seminar4.jpeg","/Seminar5.jpeg", "/Seminar6.jpeg", "/Seminar7.jpeg"] },
     { name: "Class to Class Compaign", images: ["/C2C1.jpeg", "/C2C2.jpeg", "/C2C3.jpeg","/C2C4.jpeg", "/C2C5.jpeg", "/C2C6.jpeg","/C2C7.jpeg"] },
-    { name: "Palestine Conference", images: ["/Palestine1.jpeg", "/Palestine2.jpeg"] },
     // { name: "Teachers Day", images: ["/TechersDay1.jpeg", "/TechersDay2.jpeg", "/TechersDay3.jpeg"] },
     // { name: "Study Circle", images: ["/StudyCircle1.jpeg", "/StudyCircle2.jpeg", "/StudyCircle3.jpeg"] }
   ];

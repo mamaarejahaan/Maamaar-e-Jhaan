@@ -1,16 +1,21 @@
 const collaborators = [
   {
-    name: "Paragon Consultant",
-    img:"/collaborator1.png",
-  },
-  {
-    name: "A&B Consultant",
-    img:"/collaborator2.jpeg",
-  },
-  {
     name: "Alkhidmat Health Foundation",
     img:"/collaborator3.jpeg",
   },
+   {
+    name: "PIMA",
+    img:"/collaborator8.png",
+  },
+  {
+    name: "Paragon Consultant",
+    img:"/collaborator1.png",
+  },
+  
+  // {
+  //   name: "A&B Consultant",
+  //   img:"/collaborator2.jpeg",
+  // },
   // {
   //   name: "Dunya Consultant",
   //   img:"/collaborator4.jpeg",
@@ -26,10 +31,6 @@ const collaborators = [
   {
     name: "Quran Club",
     img:"/collaborator7.jpeg",
-  },
-  {
-    name: "PIMA",
-    img:"/collaborator8.png",
   },
   {
     name: "Influencer of Sarogdha",

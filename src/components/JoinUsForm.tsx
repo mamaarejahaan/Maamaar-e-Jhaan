@@ -11,14 +11,14 @@ import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { databases, ID } from '@/appwrite/appwrite';
 import conf from '@/appwrite/conf';
-
+import emailjs from "@emailjs/browser"
 const Questions = [
   'What do you know about our vision?',
   'Why you want to join us?',
   'What does Iqbal philosphy mean to you as a student?',
   'What is your relation with Quran?',
-  'Enlist your hobies? (Optional)',
-  'Enlist the book you read other than academic book? (Optional)',
+  'Enlist your hobbies?',
+  'Enlist the book you read other than academic book?',
 ];
 
 const step1Schema = z.object({
@@ -49,9 +49,11 @@ interface Props {
   value: string[];
   setValue: (val: string[]) => void;
   error?: string;
+  setChip5Error:(val:string)=>void
+  setChip6Error:(val:string)=>void
 }
 
-const ChipInput: React.FC<Props> = ({ label, value, setValue, error }) => {
+const ChipInput: React.FC<Props> = ({ label, value, setValue, error,setChip5Error,setChip6Error }) => {
   const [input, setInput] = useState('');
 
   const addChip = () => {
@@ -90,13 +92,23 @@ const ChipInput: React.FC<Props> = ({ label, value, setValue, error }) => {
         <input
           className="flex-1 min-w-[100px] outline-none bg-transparent"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => {
+            if(label.includes("Enlist your hobbies")){
+              setChip5Error("")
+            }
+            if(label.includes("Enlist the book")){
+              setChip6Error("")
+            }
+            setInput(e.target.value)
+          }}
           onKeyDown={handleKeyDown}
           placeholder="Type and press Enter"
         />
       </div>
       <div className="mt-2 flex md:hidden justify-end">
-        <Button size="sm" type="button" onClick={addChip}>
+        <Button size="sm" type="button" 
+        className='text-indigo-700 hover:text-indigo-700 border border-indigo-700 bg-transparent hover:bg-transparent'
+        onClick={addChip}>
           Add
         </Button>
       </div>
@@ -115,6 +127,8 @@ const JoinUsForm: React.FC<JoinUsProps> = ({ setDialogOpen }) => {
   const [formData, setFormData] = useState<Step1FormData | null>(null);
   const [q5Chips, setQ5Chips] = useState<string[]>([]);
   const [q6Chips, setQ6Chips] = useState<string[]>([]);
+  const [chip5Error,setChip5Error]=useState("")
+   const [chip6Error,setChip6Error]=useState("")
 
   const {
     register: registerStep1,
@@ -141,7 +155,25 @@ const JoinUsForm: React.FC<JoinUsProps> = ({ setDialogOpen }) => {
 
   const onSubmitStep2 = async (data: Step2FormData) => {
     if (!formData) return;
-
+    if(q5Chips.length>0){
+      setChip5Error("")
+    }
+    if(q6Chips.length>0){
+      setChip6Error("")
+    }
+    if(q5Chips.length===0 && q6Chips.length===0){
+      setChip5Error("This question is required") 
+       setChip6Error("This question is required")
+      return
+    }
+    if(q5Chips.length===0){
+      setChip5Error("This question is required")
+      return
+    }
+    if(q6Chips.length===0){
+      setChip6Error("This question is required")
+      return
+    }
     const answersArray = Questions.map((q, index) => {
       let answer = '';
       if (index === 4) {
@@ -168,12 +200,31 @@ const JoinUsForm: React.FC<JoinUsProps> = ({ setDialogOpen }) => {
         ID.unique(),
         fullData
       );
+       const templateParams = {
+    name: fullData.fullname,
+    email:fullData.email,
+    phone:fullData.phone,
+    class:fullData.class,
+    department:fullData.department,
+    sargodhaAddress:fullData.sargodhaAddress,
+    permanentAddress:fullData.permanentAddress,
+    bloodGroup:fullData.bloodGroup || "N/A",
+    time: new Date().toLocaleString(),
+    website_link:conf.websiteURL
+  };
+      await emailjs.send(
+        conf.emailjsServiceId,
+        conf.emailjsJoinusFormTemplatedId,
+        templateParams,
+      conf.emailjsPublicKey
+      )
       toast.success('Thank you for joining us, we will contact you soon!', { id: toastId });
       setDialogOpen(false);
       resetStep1();
       resetStep2();
       setQ5Chips([]);
       setQ6Chips([]);
+
     } catch (error) {
       console.error('Error saving to Appwrite:', error);
       toast.error('Something went wrong while submitting. Try again.', { id: toastId });
@@ -199,7 +250,7 @@ const JoinUsForm: React.FC<JoinUsProps> = ({ setDialogOpen }) => {
               'permanentAddress',
               'email',
               'phone',
-              'bloodGroup',
+              'bloodGroup (Optional)',
             ] as (keyof Step1FormData)[]
           ).map((field) => (
             <div key={field}>
@@ -251,10 +302,21 @@ const JoinUsForm: React.FC<JoinUsProps> = ({ setDialogOpen }) => {
             </div>
           ))}
 
-          <ChipInput label={Questions[4]} value={q5Chips} setValue={setQ5Chips} />
-          <ChipInput label={Questions[5]} value={q6Chips} setValue={setQ6Chips} />
+          <ChipInput label={Questions[4]} value={q5Chips} setValue={setQ5Chips} setChip5Error={setChip5Error}
+          setChip6Error={setChip6Error} />
+          {
+            chip5Error && <p className='text-xs text-red-500 pl-1 -mt-13 md:-mt-3'>{chip5Error}</p>
+          }
+          <div className='mt-10 md:mt-0'>
+            <ChipInput label={Questions[5]} value={q6Chips} setValue={setQ6Chips}
+            setChip5Error={setChip5Error}
+          setChip6Error={setChip6Error} />
+          </div>
+           {
+            chip6Error && <p className='text-xs text-red-500 pl-1 -mt-13 md:-mt-3'>{chip6Error}</p>
+          }
 
-          <div className="flex justify-between gap-4 mt-4">
+          <div className="flex justify-between gap-4 mt-14 md:mt-4">
             <Button
               variant="secondary"
               className="border cursor-pointer border-blue-dark text-blue-dark hover:text-blue-dark"
