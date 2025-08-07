@@ -56,7 +56,7 @@ const Resources = () => {
               className="w-full h-44 object-cover rounded-t-xl"
             />
             <div className="p-4 flex flex-col justify-between flex-grow">
-              <h3 className="bg-gradient-to-r  from-blue-dark to-indigo-700 text-transparent bg-clip-text font-semibold text-sm mb-3">{item.year}</h3>
+              <h3 className="bg-gradient-to-r  from-blue-dark to-indigo-700 text-transparent bg-clip-text font-medium text-sm mb-3">{item.year}</h3>
               <Link to={item.link} target="_blank" rel="noopener noreferrer">
                 <Button
                   className="bg-transparent cursor-pointer hover:bg-indigo-700 hover:text-white text-blue-dark border border-blue-dark hover:border-none transition duration-300 w-full"
