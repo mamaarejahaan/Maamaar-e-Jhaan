@@ -12,18 +12,6 @@ const collaborators = [
     img:"/collaborator1.png",
   },
   
-  // {
-  //   name: "A&B Consultant",
-  //   img:"/collaborator2.jpeg",
-  // },
-  // {
-  //   name: "Dunya Consultant",
-  //   img:"/collaborator4.jpeg",
-  // },
-  // {
-  //   name: "Alkhidmat Foundation",
-  //   img:"/collaborator5.jpeg",
-  // },
   {
     name: "Dental Solutions",
     img:"/collaborator6.jpeg",

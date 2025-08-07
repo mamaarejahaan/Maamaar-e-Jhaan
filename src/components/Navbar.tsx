@@ -1,6 +1,5 @@
 import {  useState } from "react";
 import { Menu, X } from "lucide-react";
-// import { MdKeyboardArrowDown } from "react-icons/md";
 import { Link, useLocation } from "react-router-dom";
  import {
   AlertDialog,
@@ -157,8 +156,6 @@ const Navbar = () => {
     >
       Resources
     </a>
-    {/* <MdKeyboardArrowDown className="mt-1.5"/>
-    </div> */}
     <Link
       to="/events-and-activities"
       className="border-b border-gray-200 pb-2 hover:text-blue-700"

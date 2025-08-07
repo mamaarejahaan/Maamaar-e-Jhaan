@@ -72,7 +72,6 @@ const [showUserDialog, setShowUserDialog] = useState(false);
           joinusVisibility: !showJoinUs,
         }
       );
-      console.log("udpated",updated)
       setShowJoinUs(updated.joinusVisibility);
       toast.success("Toggled successfully",{id:toastId})
     } catch (err) {

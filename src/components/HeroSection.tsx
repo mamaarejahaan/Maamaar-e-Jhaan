@@ -45,7 +45,7 @@ const HeroSection = () => {
       >
         <h1
           data-aos="fade-up"
-          className="text-4xl font-bold p-2 bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text mb-2"
+          className="text-4xl font-bold p-2 capitalize bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text mb-2"
         >
           <Typewriter
             words={['Empowering minds, changing lives']}

@@ -23,7 +23,6 @@ const HomePage = () => {
           conf.appwriteSettingCollectionId,
           conf.appwriteSettingDocumentId
         );
-        console.log("homeres",res)
         setShowJoinUs(res.joinusVisibility);
         
       } catch (err) {

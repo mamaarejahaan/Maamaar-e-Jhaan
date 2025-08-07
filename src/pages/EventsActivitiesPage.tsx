@@ -27,8 +27,6 @@ const EventsActivitiesPage = () => {
     { name: "Palestine Wall", images: ["/PalestineWall1.jpeg", "/PalestineWall2.jpeg","/PalestineWall3.jpeg", "/PalestineWall4.jpeg","/PalestineWall5.jpeg", "/PalestineWall6.jpeg","/PalestineWall7.jpeg", "/PalestineWall8.jpeg","/PalestineWall9.jpeg", "/PalestineWall10.jpeg"] },
     { name: "Online Sessions and Seminars", images: ["/Seminar1.jpeg", "/Seminar2.jpeg", "/Seminar3.jpeg", "/Seminar4.jpeg","/Seminar5.jpeg", "/Seminar6.jpeg", "/Seminar7.jpeg"] },
     { name: "Class to Class Compaign", images: ["/C2C1.jpeg", "/C2C2.jpeg", "/C2C3.jpeg","/C2C4.jpeg", "/C2C5.jpeg", "/C2C6.jpeg","/C2C7.jpeg"] },
-    // { name: "Teachers Day", images: ["/TechersDay1.jpeg", "/TechersDay2.jpeg", "/TechersDay3.jpeg"] },
-    // { name: "Study Circle", images: ["/StudyCircle1.jpeg", "/StudyCircle2.jpeg", "/StudyCircle3.jpeg"] }
   ];
   const Activities = [
     { name: "Sports", images: ["/Sports1.jpeg", "/Sports2.jpeg", "/Sports3.jpeg", "/Sports4.jpeg"] },
@@ -40,7 +38,6 @@ const EventsActivitiesPage = () => {
     { name: "PIMA convention", images: ["/PIMA1.jpeg", "/PIMA2.jpeg", "/PIMA3.jpeg"] },
     { name: "Teachers Day", images: ["/TechersDay1.jpeg", "/TechersDay2.jpeg", "/TechersDay3.jpeg"] },
     { name: "Study Circle", images: ["/StudyCircle1.jpeg", "/StudyCircle2.jpeg", "/StudyCircle3.jpeg"] },
-    // { name: "Painting & Videography Competition", images: ["/StudyCircle1.jpeg", "/StudyCircle2.jpeg", "/StudyCircle3.jpeg"] }
   ];
 
   return (
@@ -81,10 +78,6 @@ const EventsActivitiesPage = () => {
           <Swiper
             modules={[Pagination]}
             pagination={{ clickable: true }}
-  //             autoplay={{
-  //   delay: 3000, // 3 seconds delay between slides
-  //   disableOnInteraction: false, // Keeps autoplay active even after user interaction
-  // }}
             spaceBetween={10}
             breakpoints={{
               0: {
@@ -123,10 +116,6 @@ const EventsActivitiesPage = () => {
           <Swiper
             modules={[Pagination]}
             pagination={{ clickable: true }}
-  //             autoplay={{
-  //   delay: 3000, // 3 seconds delay between slides
-  //   disableOnInteraction: true, // Keeps autoplay inactive even after user interaction
-  // }}
             spaceBetween={10}
             breakpoints={{
               0: {

@@ -14,7 +14,6 @@ const AdminAccessPage = () => {
        try {
         setIsLoading(true)
          const session=await account.get()
-         console.log("session",session)
         setSession(session)
        } catch (error) {
         console.log("error in checking Auth",error)
