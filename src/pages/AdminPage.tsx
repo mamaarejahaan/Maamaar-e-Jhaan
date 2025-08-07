@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { databases } from "@/appwrite/appwrite"; 
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
-import { CustomPageLoader } from "@/components/loader";
+import CustomLoader, { CustomPageLoader } from "@/components/loader";
 import { Query } from "appwrite";
 import { MdBloodtype, MdEmail, MdOutlinePhone } from "react-icons/md";
 import { TiHome } from "react-icons/ti";
@@ -16,6 +16,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import toast from "react-hot-toast";
 import { useAuthStore } from "@/zustand/authStore";
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 
 
 const AdminPage = () => {
@@ -28,21 +29,10 @@ const [showUserDialog, setShowUserDialog] = useState(false);
   const [isAnnouncementOpen,setIsAnnouncementOpen]=useState(false)
   const [loading, setLoading] = useState(true);
       const [joinLoading, setJoinLoading] = useState(false);
+      const [isDeleting,setIsDeleting]=useState(false)
+      const [isConfirmDeleteOpen,setIsConfirmDeleteOpen]=useState(false)
 
    useEffect(() => {
-    //     const fetchShowJoin = async () => {
-    //   try {
-    //     const res = await databases.getDocument(
-    //       conf.appwriteDatabaseId,
-    //       conf.appwriteSettingCollectionId,
-    //       conf.appwriteSettingDocumentId
-    //     );
-    //     console.log("response",res)
-    //     setShowJoinUs(res.joinusVisibility);
-    //   } catch (err) {
-    //     console.error("Error fetching Join setting:", err);
-    //   }
-    // };
     const fetchUsers = async () => {
       try {
         setLoading(true)
@@ -59,8 +49,6 @@ const [showUserDialog, setShowUserDialog] = useState(false);
         setLoading(false)
       }
     };
-    // fetchShowJoin()
-    console.log("join",showJoinUs)
     fetchUsers();
   }, []);
 
@@ -95,6 +83,32 @@ const [showUserDialog, setShowUserDialog] = useState(false);
       setJoinLoading(false)
     }
   };
+
+  const handleDeleteUser = async () => {
+  if (!selectedUser) {
+    toast.error("Please refresh the page and Try again!")
+    return
+  }
+
+  const toastId = toast.loading("Deleting user...");
+  try {
+    setIsDeleting(true)
+    await databases.deleteDocument(
+      conf.appwriteDatabaseId,
+      conf.appwriteCollectionId,
+      selectedUser.$id
+    );
+    setUsers((prevUsers: any) => prevUsers.filter((u: any) => u.$id !== selectedUser.$id));
+    toast.success("User deleted successfully", { id: toastId });
+  } catch (err) {
+    console.error("Error deleting user:", err);
+    toast.error("Failed to delete user", { id: toastId });
+  }
+  finally{
+    setIsDeleting(false)
+    setIsConfirmDeleteOpen(false)
+  }
+};
 
   if(loading) return <CustomPageLoader />
   return (
@@ -178,7 +192,7 @@ const [showUserDialog, setShowUserDialog] = useState(false);
     >
 
       {/* User details grid */}
-      <div className="grid  grid-cols-1 mb-14 md:grid-cols-2 gap-5 text-sm overflow-wrap break-words">
+      <div className="grid  grid-cols-1 mb-28 md:grid-cols-2 gap-5 text-sm overflow-wrap break-words">
         {[
           { label: "Name", value: user.fullname, icon: <MdEmail /> },
           { label: "Email", value: user.email, icon: "✉️" },
@@ -201,10 +215,11 @@ const [showUserDialog, setShowUserDialog] = useState(false);
 
    
 
-       <Button
+      <div className="flex flex-col gap-2  absolute bottom-4  left-3 right-3 ">
+         <Button
       size="sm"
 
-      className="mt-4 bg-gradient-to-r cursor-pointer from-blue-dark to-indigo-700 hover:bg-blue-dark  absolute bottom-4  left-3 right-3 "
+      className="bg-gradient-to-r cursor-pointer from-blue-dark to-indigo-700 hover:bg-blue-dark "
       onClick={() => {
         setSelectedUser(user);
         setShowUserDialog(true);
@@ -212,6 +227,18 @@ const [showUserDialog, setShowUserDialog] = useState(false);
     >
       View Full Details
     </Button>
+      <Button
+      size="sm"
+  disabled={isDeleting}
+      className="bg-red-600 cursor-pointer  hover:bg-red-700 "
+      onClick={() => {
+        setSelectedUser(user);
+       setIsConfirmDeleteOpen(true)
+      }}
+    >
+      Delete
+    </Button>
+        </div>
     </div>
   ))}
 </div>
@@ -281,9 +308,37 @@ const [showUserDialog, setShowUserDialog] = useState(false);
   </DialogContent>
 </Dialog>
 
+<AlertDialog open={isConfirmDeleteOpen} onOpenChange={setIsConfirmDeleteOpen}>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle className="leading-relaxed text-base">Are you absolutely sure you want to delete {selectedUser?.fullname}?</AlertDialogTitle>
+          <AlertDialogDescription className="-mt-1 text-gray-700">
+  This action is irreversible. Once deleted, the user information cannot be recovered and will be permanently removed. Please confirm if you wish to proceed.
+</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter className="mt-6">
+          <AlertDialogCancel
+          type="button"
+          disabled={isDeleting}
+          className="border border-blue-dark text-blue-dark hover:text-blue-dark cursor-pointer"
+          onClick={()=>{
+            setSelectedUser("")
+            setIsConfirmDeleteOpen(false)
+          }}
+          >Cancel</AlertDialogCancel>
+          <AlertDialogAction
+          type="button"
+          disabled={isDeleting}
+          onClick={()=>handleDeleteUser()}
+          className="bg-red-600 hover:bg-red-700 md:w-24 cursor-pointer"
+          >
+            {isDeleting?<CustomLoader />:"Delete"}
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
     </div>
   );
 };
 
 export default AdminPage;
-

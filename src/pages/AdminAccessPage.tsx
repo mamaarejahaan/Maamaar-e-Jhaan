@@ -2,8 +2,9 @@ import { account } from '@/appwrite/appwrite';
 import { CustomPageLoader } from '@/components/loader';
 import { useAuthStore } from '@/zustand/authStore';
 import  { useEffect, useState } from 'react'
-import AdminLogin from './AdminLogin';
 import AdminPage from './AdminPage';
+import AdminLogin from './AdminLogin';
+
 
 const AdminAccessPage = () => {
     const {session,setSession}=useAuthStore()

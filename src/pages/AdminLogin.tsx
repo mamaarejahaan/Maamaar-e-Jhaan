@@ -15,26 +15,9 @@ const AdminLogin = () => {
   const setSession = useAuthStore((state:any) => state.setSession);
   const navigate = useNavigate();
 
-  // useEffect(()=>{
-  //     const checkSession = async () => {
-  //   try {
-  //      const session=await account.get(); 
-  //      setSession(session)
-  //     navigate('/admin');
-  //   } catch (err) {
-      
-  //   }
-  // };
-
-  // checkSession();
-  // },[])
+ 
   const onSubmit = async (data: any) => {
     try {
-    //      try {
-    //   await account.deleteSession('current');
-    // } catch {
-    //   // Ignore error – probably no session
-    // }
       const session = await account.createEmailPasswordSession(data.email, data.password);
       setSession(session);
       navigate('/admin'); 
