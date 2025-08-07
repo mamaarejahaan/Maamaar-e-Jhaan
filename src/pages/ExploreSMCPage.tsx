@@ -12,14 +12,16 @@ const ExploreSMCPage = () => {
   },[])
 
    const SMC= [
-    { name: "Explore SMC", images: ["/SMC1.jpg", "/SMC2.jpg", "/SMC3.jpg", "/SMC6.jpg","/SMC10.jpg", "/SMC11.jpg", "/SMC12.jpeg", "/SMC13.jpeg","/SMC14.jpeg",
-      "/SMC15.jpeg", "/SMC17.jpeg", "/SMC18.jpeg", "/SMC19.jpeg", "/SMC20.jpeg","/SMC21.jpeg", "/SMC22.jpeg", "/SMC23.jpeg", "/SMC24.jpeg"
+    { name: "Explore SMC", images: ["/SMC1.jpg", "/SMC2.jpg", "/SMC3.jpg","/SMC4.jpeg","/SMC5.jpeg", "/SMC6.jpg","/SMC7.jpeg","/SMC8.jpeg", "/SMC9.jpeg","/SMC10.jpg", "/SMC11.jpg", "/SMC12.jpeg", "/SMC13.jpeg","/SMC14.jpeg",
+      "/SMC15.jpeg","/SMC16.jpeg", "/SMC17.jpeg", "/SMC18.jpeg", "/SMC19.jpeg", "/SMC20.jpeg","/SMC21.jpeg", "/SMC22.jpeg", "/SMC23.jpeg", "/SMC24.jpeg",
+      "/SMC25.jpeg", "/SMC26.jpeg", "/SMC27.jpeg","/SMC28.jpeg","/SMC29.jpeg", "/SMC30.jpeg","/SMC31.jpeg","/SMC32.jpeg", "/SMC33.jpeg","/SMC34.jpeg", "/SMC35.jpeg", "/SMC36.jpeg", "/SMC37.jpeg","/SMC38.jpeg",
+      "/SMC39.jpeg", "/SMC40.jpeg", "/SMC41.jpeg", "/SMC42.jpeg", "/SMC43.jpeg","/SMC44.jpeg"
     ] },
   ];
 
 
   return (
-    <div className='bg-gray-200 min-h-screen py-20 pb-8  md:pb-0 md:pt-24  px-4 md:px-10'>
+    <div className='bg-gray-200 min-h-screen py-20 pb-8  md:pt-24  px-4 md:px-10'>
       <Navbar />
 
       <button
