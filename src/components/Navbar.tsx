@@ -225,8 +225,8 @@ const Navbar = () => {
   <Dialog open={isJoinFormOpen} onOpenChange={setIsJoinFormOpen}>
   <DialogContent className="max-h-[90vh] overflow-hidden">
     <DialogHeader>
-      <DialogTitle className="text-center bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text text-xl">
-        Fill the form below
+      <DialogTitle className="text-center -ml-4 mt-2 bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text text-xl">
+        Fill the form below to Join us
       </DialogTitle>
     </DialogHeader>
     <Separator className="my-1" />

@@ -79,7 +79,7 @@ const ContactUs = () => {
   return (
     <section
       id="contact"
-      className="py-20 px-8 md:px-32 w-screen overflow-x-hidden  space-y-16"
+      className="pt-20 px-8 md:px-32 w-screen overflow-x-hidden  space-y-16"
       data-aos="fade-up"
     >
       <div className="text-center space-y-2" data-aos="zoom-in">

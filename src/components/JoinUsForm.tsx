@@ -264,10 +264,10 @@ const JoinUsForm: React.FC<JoinUsProps> = ({ setDialogOpen }) => {
             </div>
           ))}
 
-          <div className="flex justify-between">
+          <div className="flex justify-between mt-8">
             <Button
               type="button"
-              className="border bg-transparent hover:bg-transparent border-blue-dark bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text cursor-pointer hover:text-blue-dark"
+              className="border bg-transparent  hover:bg-transparent border-blue-dark bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text cursor-pointer hover:text-blue-dark"
               onClick={() => {
                 setDialogOpen(false);
                 resetStep1();
