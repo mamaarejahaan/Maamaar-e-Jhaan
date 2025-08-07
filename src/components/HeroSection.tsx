@@ -36,7 +36,7 @@ const HeroSection = () => {
     <section
       id="hero"
       className="relative grid grid-cols-1
-      md:grid-cols-2 col-reverse gap-8 min-h-screen md:pt-40 items-center bg-gray-200 justify-items-center py-24 pb-16 md:py-20 px-8 md:px-10"
+      md:grid-cols-2 col-reverse gap-8 min-h-screen w-screen overflow-x-hidden  md:pt-40 items-center bg-gray-200 justify-items-center py-24 pb-16 md:py-20 px-8 md:px-10"
     >
 
       {/* Left content */}

@@ -79,7 +79,7 @@ const ContactUs = () => {
   return (
     <section
       id="contact"
-      className="py-20 px-8 md:px-32 space-y-16 bg-gray-50"
+      className="py-20 px-8 md:px-32 w-screen overflow-x-hidden  space-y-16"
       data-aos="fade-up"
     >
       <div className="text-center space-y-2" data-aos="zoom-in">
@@ -120,7 +120,7 @@ const ContactUs = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="sender@email.com"
+            placeholder="Your email"
           />
         </div>
 
@@ -131,7 +131,7 @@ const ContactUs = () => {
             id="message"
             
             className="resize-none h-20"
-            placeholder="Your message..."
+            placeholder="Type Your message..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
@@ -149,13 +149,12 @@ const ContactUs = () => {
         }
         </Button>
         <div className="flex flex-col md:flex-row gap-3 md:gap-0 md:justify-between items-center  text-sm text-indigo-700">
-        <p className="text-blue-dark text-sm font-medium">Contact via Whatsapp</p>
-        <div className="flex flex-row justify-between  md:flex-col gap-2 text-xs items-center md:justify-center">
+        <p className="text-blue-dark text-base font-medium">Contact via Whatsapp</p>
         <Link
                 to="https://wa.me/923194760659"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group"
+                className="group flex flex-row justify-between  md:flex-col gap-2 text-xs items-center md:justify-center"
               >
                 <FaWhatsappSquare
                   className="
@@ -167,9 +166,8 @@ const ContactUs = () => {
                     rounded-full p-2 bg-white
                   "
                 />
+                <p>+923194760659</p>
               </Link>
-              <p>+923194760659</p>
-        </div>
         </div>
       </form>
 

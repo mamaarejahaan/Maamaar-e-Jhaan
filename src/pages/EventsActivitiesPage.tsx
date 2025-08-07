@@ -41,7 +41,7 @@ const EventsActivitiesPage = () => {
   ];
 
   return (
-    <div className='bg-gray-200 min-h-screen py-20 md:py-24 px-4 md:px-10'>
+    <div className=' min-h-screen pt-20 md:pt-24 pb-7 md:pb-10  px-4 md:px-10'>
       <Navbar />
 
       <button
@@ -61,16 +61,16 @@ const EventsActivitiesPage = () => {
         </p>
       </div>
     <div className='flex justify-between mt-14 px-2 d:px-0 md:justify-around gap-4'>
-    <p className={`text-xl text-indigo-700 font-semibold cursor-pointer ${activeTab==1 && 'border border-b-blue-dark'}`}
+    <p className={`text-xl text-indigo-700 font-semibold cursor-pointer ${activeTab==1 && 'border-b-2 border-b-blue-dark'}`}
     onClick={()=>setActiveTab(1)}
     >Events</p>
-    <p className={`text-xl font-semibold text-indigo-700 cursor-pointer ${activeTab==2 && 'border border-b-blue-dark'}`}
+    <p className={`text-xl font-semibold text-indigo-700 cursor-pointer ${activeTab==2 && 'border-b-2 border-b-blue-dark'}`}
     onClick={()=>setActiveTab(2)}>Activities</p>
     </div>
     {
       activeTab==2?(
         Activities.map((activity, idx) => (
-        <div key={idx} className="mb-20 mt-16">
+        <div key={idx} className="mt-16">
           <h2 className="text-center text-2xl md:text-3xl font-bold text-indigo-700 mb-6">
             {activity.name}
           </h2>
@@ -94,7 +94,7 @@ const EventsActivitiesPage = () => {
           >
             {activity.images.map((imgSrc, index) => (
               <SwiperSlide key={index}>
-                <div className="w-full h-72 md:h-96 overflow-hidden rounded-xl shadow-md">
+                <div className="w-full h-96 overflow-hidden rounded-xl shadow-md">
                   <img
                     src={imgSrc}
                     alt={`${activity.name} ${index + 1}`}
@@ -108,7 +108,7 @@ const EventsActivitiesPage = () => {
       ))
       ):(
           Events.map((event, idx) => (
-        <div key={idx} className="mb-20 mt-16">
+        <div key={idx} className="mt-16">
           <h2 className="text-center text-2xl md:text-3xl font-bold text-indigo-700 mb-6">
             {event.name}
           </h2>
@@ -132,7 +132,7 @@ const EventsActivitiesPage = () => {
           >
             {event.images.map((imgSrc, index) => (
               <SwiperSlide key={index}>
-                <div className="w-full h-72 md:h-96 overflow-hidden rounded-xl shadow-md">
+                <div className="w-full h-96 overflow-hidden rounded-xl shadow-md">
                   <img
                     src={imgSrc}
                     alt={`${event.name} ${index + 1}`}

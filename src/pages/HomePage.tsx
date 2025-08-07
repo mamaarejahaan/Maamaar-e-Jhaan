@@ -38,7 +38,7 @@ const HomePage = () => {
 
   if(isLoading) return <CustomPageLoader />
   return (
-    <div>
+    <div className='w-screen overflow-x-hidden bg-gray-50'>
     <Navbar />
     <HeroSection />
     <AboutUs />

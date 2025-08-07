@@ -21,7 +21,7 @@ const ExploreSMCPage = () => {
 
 
   return (
-    <div className='bg-gray-200 min-h-screen py-20 pb-8  md:pt-24  px-4 md:px-10'>
+    <div className='min-h-screen pt-20 pb-8  md:pt-24  px-4 md:px-10'>
       <Navbar />
 
       <button
@@ -32,7 +32,7 @@ const ExploreSMCPage = () => {
       </button>
    
     {SMC.map((smc, idx) => (
-        <div key={idx} className="mb-20 mt-16">
+        <div key={idx} className="mt-16">
           <h2 className="text-center text-2xl md:text-3xl font-bold text-indigo-700 mb-6">
             {smc.name}
           </h2>

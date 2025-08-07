@@ -79,7 +79,7 @@ const AdminAnnouncementPage = () => {
   }
   if(loading) return <CustomPageLoader />
   return (
-    <div className="bg-gray-200 min-h-screen py-20 pb-16 md:py-24 px-4 md:px-10">
+    <div className="bg-gray-50 min-h-screen pt-20  md:pt-24 pb-7 px-4 md:px-10">
         <Navbar />
         <div className="flex justify-between  gap-5 items-center">
     <button
@@ -123,7 +123,7 @@ const AdminAnnouncementPage = () => {
                     mt-3">Create Now</Button>
                               </div>
       ) : (
-      <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 md:px-8 py-8">
+      <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 md:px-8 pt-8">
   {announcements.map((item: any) => (
     <Card
       key={item.$id}
