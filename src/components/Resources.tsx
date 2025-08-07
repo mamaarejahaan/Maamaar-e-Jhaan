@@ -34,7 +34,7 @@ const Resources = () => {
 
 
   return (
-    <div id="resources" className="py-20 px-8 md:px-20 space-y-16 bg-gray-50">
+    <div id="resources" className="py-20 w-screen overflow-x-hidden px-8 md:px-20 space-y-16">
       {/* Header */}
       <div className="text-center space-y-3" data-aos="fade-up">
         <h2 className="text-4xl font-bold bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text">Academic Resources</h2>

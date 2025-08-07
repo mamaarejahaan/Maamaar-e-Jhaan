@@ -27,7 +27,7 @@ const collaborators = [
 ];
 const Collaborator = () => {
   return (
-    <div id="collaborator"  className="py-20 px-8 md:px-32 space-y-16 bg-gray-50">
+    <div id="collaborator"  className="py-20 w-screen overflow-x-hidden  px-8 md:px-32 space-y-16">
      <div className="text-center" data-aos="fade-up">
         <h2 className="text-2xl font-bold text-blue-dark mb-10">Our Collaborator</h2>
 

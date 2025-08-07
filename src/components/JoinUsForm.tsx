@@ -102,7 +102,7 @@ const ChipInput: React.FC<Props> = ({ label, value, setValue, error,setChip5Erro
             setInput(e.target.value)
           }}
           onKeyDown={handleKeyDown}
-          placeholder="Type and press Enter"
+          placeholder="Type and press Enter or click Add button"
         />
       </div>
       <div className="mt-2 flex md:hidden justify-end">
@@ -256,7 +256,8 @@ const JoinUsForm: React.FC<JoinUsProps> = ({ setDialogOpen }) => {
             <div key={field}>
               <Input
                 {...registerStep1(field)}
-                placeholder={field.replace(/([A-Z])/g, ' $1')}
+                placeholder={`Enter your ${field.replace(/([A-Z])/g, ' $1')}`}
+                className='placeholder:capitalize'
                 type={field === 'email' ? 'email' : 'text'}
               />
               <p className="text-xs text-red-500 mt-1 pl-1">{errorsStep1[field]?.message}</p>

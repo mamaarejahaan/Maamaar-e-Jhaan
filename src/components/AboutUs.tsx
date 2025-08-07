@@ -89,7 +89,7 @@ const team = [
 
 const AboutUs = () => {
   return (
-    <section id="about" className="py-20 px-8 md:px-32 space-y-16 bg-gray-50">
+    <section id="about" className="py-20 w-screen  overflow-x-hidden px-8 md:px-32 space-y-16">
       {/* About Section */}
       <div className="text-center">
         <h2  data-aos="fade-down" className="text-4xl font-bold bg-gradient-to-r from-blue-dark to-indigo-700 text-transparent bg-clip-text mb-4">About Us</h2>

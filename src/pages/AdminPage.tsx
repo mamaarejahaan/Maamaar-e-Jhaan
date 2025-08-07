@@ -111,7 +111,7 @@ const [showUserDialog, setShowUserDialog] = useState(false);
 
   if(loading) return <CustomPageLoader />
   return (
-    <div className="min-h-screen bg-gray-50 py-16 pb-16 md:py-20 px-4 md:px-10">
+    <div className="min-h-screen bg-gray-50 pt-16   md:pt-20 pb-7 px-4 md:px-10">
       <Navbar />
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row justify-start items-start  md:justify-between md:items-center my-4 md:my-6">
