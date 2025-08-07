@@ -40,7 +40,7 @@ const EventsActivitiesPage = () => {
     { name: "PIMA convention", images: ["/PIMA1.jpeg", "/PIMA2.jpeg", "/PIMA3.jpeg"] },
     { name: "Teachers Day", images: ["/TechersDay1.jpeg", "/TechersDay2.jpeg", "/TechersDay3.jpeg"] },
     { name: "Study Circle", images: ["/StudyCircle1.jpeg", "/StudyCircle2.jpeg", "/StudyCircle3.jpeg"] },
-    { name: "Painting & Videography Competition", images: ["/StudyCircle1.jpeg", "/StudyCircle2.jpeg", "/StudyCircle3.jpeg"] }
+    // { name: "Painting & Videography Competition", images: ["/StudyCircle1.jpeg", "/StudyCircle2.jpeg", "/StudyCircle3.jpeg"] }
   ];
 
   return (
