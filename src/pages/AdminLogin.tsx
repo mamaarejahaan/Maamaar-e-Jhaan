@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useAuthStore } from '@/zustand/authStore';
 import { Eye, EyeOff } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -15,26 +15,26 @@ const AdminLogin = () => {
   const setSession = useAuthStore((state:any) => state.setSession);
   const navigate = useNavigate();
 
-  useEffect(()=>{
-      const checkSession = async () => {
-    try {
-       const session=await account.get(); 
-       setSession(session)
-      navigate('/admin');
-    } catch (err) {
+  // useEffect(()=>{
+  //     const checkSession = async () => {
+  //   try {
+  //      const session=await account.get(); 
+  //      setSession(session)
+  //     navigate('/admin');
+  //   } catch (err) {
       
-    }
-  };
+  //   }
+  // };
 
-  checkSession();
-  },[])
+  // checkSession();
+  // },[])
   const onSubmit = async (data: any) => {
     try {
-         try {
-      await account.deleteSession('current');
-    } catch {
-      // Ignore error – probably no session
-    }
+    //      try {
+    //   await account.deleteSession('current');
+    // } catch {
+    //   // Ignore error – probably no session
+    // }
       const session = await account.createEmailPasswordSession(data.email, data.password);
       setSession(session);
       navigate('/admin'); 
